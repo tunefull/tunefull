@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.tunefull;
+package edu.cnm.deepdive.tunefull.controller;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.service.UserRepository;
 import edu.cnm.deepdive.tunefull.ui.main.SectionsPagerAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
