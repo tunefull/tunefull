@@ -1,6 +1,7 @@
 <resources>
-  <string name="app_name">Tunefull</string>
-  <string name="tab_text_1">Tab 1</string>
-  <string name="tab_text_2">Tab 2</string>
+  <string name="app_name">TuneFull</string>
+  <string name="discovery">Discovery</string>
+  <string name="feed">TuneFull Feed</string>
+  <string name="profile">User Profile</string>
   <string name="login_failure_message">Unable to Sign-In with provided credentials</string>
 </resources>

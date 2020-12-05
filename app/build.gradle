@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
 
 static def getProperty(String filename, String property) {
     Properties properties = new Properties()
@@ -8,6 +9,12 @@ static def getProperty(String filename, String property) {
 
 static def quoted(String value) {
     return "\"${value}\""
+}
+
+ext {
+    appName = 'TuneFull'
+    appNameSlug = 'tunefull'
+    baseUrl = 'https://tunefull.github.io'
 }
 
 android {
@@ -69,10 +76,24 @@ android {
 }
 
 dependencies {
+    // .jar-based libraries included in project
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    // Basic Android widgets
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    // Material Design component dependencies
+    implementation 'com.google.android.material:material:1.2.1'
+
+    // Preferences/settings dependencies
+    implementation 'androidx.preference:preference:1.1.1'
+
+    // Fragment navigation dependencies.
+    implementation 'androidx.navigation:navigation-fragment:2.3.1'
+    implementation 'androidx.navigation:navigation-ui:2.3.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // Lifecycle (LiveData and ViewModel) dependencies
     def lifecycle_version = '2.2.0'
@@ -84,9 +105,6 @@ dependencies {
     // ReactiveX dependencies
     implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
-    // Google Sign In dependency
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     // Gson (Google JSON parser) dependency
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -100,14 +118,44 @@ dependencies {
     // OkHttp logging dependency
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
-    //OpenId dependency (spotify signin)
+    //OpenId dependency (Spotify Sign In)
     implementation 'net.openid:appauth:0.7.1'
 
+    // TODO remove this dependency on completion
     // Stetho (inspection) dependency
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
+    // Test dependencies
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+}
+
+// TODO add other links as appropriate
+android.applicationVariants.all { variant ->
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        def docTitle = "${appName} ${project.android.defaultConfig.versionName}"
+        def compileTask = variant.javaCompileProvider.get()
+        def androidLibJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        title docTitle
+        description "Generates Javadoc for $variant.name."
+        source = compileTask.source
+        destinationDir = file("${projectDir}/../docs/api")
+        doFirst {
+            classpath = files(compileTask.classpath.files) + files(androidLibJar)
+        }
+        options {
+            links 'https://docs.oracle.com/javase/8/docs/api/'
+            links 'http://reactivex.io/RxJava/javadoc/'
+            links 'https://javadoc.io/doc/io.reactivex.rxjava2/rxandroid/latest/'
+            links 'https://javadoc.io/doc/com.facebook.stetho/stetho/latest/'
+            links 'https://commons.apache.org/proper/commons-csv/apidocs/'
+            linksOffline 'https://developer.android.com/reference', "${projectDir}/../link-offline/android"
+            linksOffline 'https://developers.google.com/android/reference', "${projectDir}/../link-offline/google"
+            windowTitle docTitle
+        }
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.source = '8'
+    }
 }
