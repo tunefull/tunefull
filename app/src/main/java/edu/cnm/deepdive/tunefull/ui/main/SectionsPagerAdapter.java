@@ -1,12 +1,15 @@
 package edu.cnm.deepdive.tunefull.ui.main;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
+import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to one of the
@@ -16,24 +19,27 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @StringRes
   private static final int[] TAB_TITLES = new int[]{R.string.discovery, R.string.feed, R.string.profile};
-  private final Context mContext;
+  private final Context context;
 
   public SectionsPagerAdapter(Context context, FragmentManager fm) {
     super(fm);
-    mContext = context;
+    this.context = context;
   }
 
   @Override
   public Fragment getItem(int position) {
-    // getItem is called to instantiate the fragment for the given page.
-    // Return a PlaceholderFragment (defined as a static inner class below).
-    return PlaceholderFragment.newInstance(position + 1);
+    if (position < 2) {
+      return ClipFeedFragment.newInstance(position + 1);
+    }
+    else {
+      return ProfileFragment.newInstance(position + 1);
+    }
   }
 
   @Nullable
   @Override
   public CharSequence getPageTitle(int position) {
-    return mContext.getResources().getString(TAB_TITLES[position]);
+    return context.getResources().getString(TAB_TITLES[position]);
   }
 
   @Override
