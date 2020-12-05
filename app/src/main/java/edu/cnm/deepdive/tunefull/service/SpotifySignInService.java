@@ -5,9 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import edu.cnm.deepdive.tunefull.R;
+import io.reactivex.Single;
 import net.openid.appauth.AuthState;
+import net.openid.appauth.AuthState.AuthStateAction;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
@@ -20,7 +23,7 @@ public class SpotifySignInService {
   @SuppressLint("StaticFieldLeak")
   private static Context context;
   private final AuthState authState;
- // private final AuthorizationService service;
+  private final AuthorizationService service;
   private final String clientId;
   private final Uri redirectUri;
   private final String authScope;
@@ -32,6 +35,7 @@ public class SpotifySignInService {
         Uri.parse(context.getString(R.string.token_endpoint_uri)));
     authState = new AuthState(serviceConfig);
     // TODO update shared preferences
+    service = new AuthorizationService(context);
     clientId = context.getString(R.string.client_id);
     redirectUri = Uri.parse(context.getString(R.string.redirect_uri));
     authScope = context.getString(R.string.authorization_scope);
@@ -88,7 +92,22 @@ public class SpotifySignInService {
 
   }
 
-  // TODO Create refresh token method that returns a bearer token
+  public Single<String> refresh() {
+    return Single.create((emitter) ->
+        authState.performActionWithFreshTokens(service, new AuthStateAction() {
+          @Override
+          public void execute(@Nullable String accessToken, @Nullable String idToken,
+              @Nullable AuthorizationException ex) {
+            if (ex == null) {
+              emitter.onSuccess(String.format("Bearer %s", accessToken));
+            } else {
+              emitter.onError(ex);
+            }
+          }
+        })
+    );
+  }
+
   // TODO Create a method to check if we're already logged in (combine with refresh)
 
   private static class InstanceHolder {
