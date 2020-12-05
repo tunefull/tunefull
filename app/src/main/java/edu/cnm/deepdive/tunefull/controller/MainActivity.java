@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
   private UserRepository userRepository; // FIXME
   private TabLayout tabs;
-  private static final int[] TAB_ICONS = new int[]{}; //FIXME
+  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_globe_24, R.drawable.ic_tunefull_logo_text, R.drawable.ic_person_24}; //FIXME
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     viewPager.setAdapter(sectionsPagerAdapter);
     tabs = findViewById(R.id.tabs);
     tabs.setupWithViewPager(viewPager);
-//    setUpTabIcons();
+    setUpTabIcons();
 
     // FIXME (this is just temporary to verify roundtrip)
     userRepository = new UserRepository(this);
