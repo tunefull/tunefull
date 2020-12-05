@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.tunefull.controller;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -39,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void setUpTabIcons() {
-    tabs.getTabAt(0).setIcon(TAB_ICONS[0]);
-    tabs.getTabAt(1).setIcon(TAB_ICONS[1]);
-    tabs.getTabAt(2).setIcon(TAB_ICONS[2]);
+    for (int i = 0; i < TAB_ICONS.length; i++) {
+      ImageView imageView = new ImageView(getApplicationContext());
+      imageView.setImageResource(TAB_ICONS[i]);
+      tabs.getTabAt(i).setCustomView(imageView);
+    }
   }
 }
