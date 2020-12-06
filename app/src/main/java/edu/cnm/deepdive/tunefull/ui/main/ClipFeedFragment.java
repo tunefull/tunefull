@@ -44,4 +44,8 @@ public class ClipFeedFragment extends Fragment {
     // TODO why isn't this working correctly? Is index not ever zero?
     return binding.getRoot();
   }
+
+  public enum FeedType {
+    DISCOVERY, FRIENDS_FOLLOWS
+  }
 }

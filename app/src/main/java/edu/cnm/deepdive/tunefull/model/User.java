@@ -1,24 +1,28 @@
 package edu.cnm.deepdive.tunefull.model;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
-// TODO Make any additions to change into an entity class (if appropriate)
 public class User {
 
   @Expose
-  @SerializedName("id")
-  private long externalId;
+  private long id;
 
   @Expose
   private String username;
 
-  public long getExternalId() {
-    return externalId;
+  private String email;
+
+  @Expose
+  private String genre;
+
+  private String oauth;
+
+  public long getId() {
+    return id;
   }
 
-  public void setExternalId(long externalId) {
-    this.externalId = externalId;
+  public void setId(long id) {
+    this.id = id;
   }
 
   public String getUsername() {
@@ -29,4 +33,27 @@ public class User {
     this.username = username;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getGenre() {
+    return genre;
+  }
+
+  public void setGenre(String genre) {
+    this.genre = genre;
+  }
+
+  public String getOauth() {
+    return oauth;
+  }
+
+  public void setOauth(String oauth) {
+    this.oauth = oauth;
+  }
 }
