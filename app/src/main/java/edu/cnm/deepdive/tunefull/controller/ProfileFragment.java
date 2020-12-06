@@ -10,12 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
-import edu.cnm.deepdive.tunefull.ui.main.PageViewModel;
+import edu.cnm.deepdive.tunefull.ui.main.ClipViewModel;
 
 public class ProfileFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
-  private PageViewModel pageViewModel;
+  private ClipViewModel clipViewModel;
   private FragmentProfileBinding binding;
 
   public static ProfileFragment newInstance(int index) {
@@ -29,12 +29,12 @@ public class ProfileFragment extends Fragment {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+    clipViewModel = new ViewModelProvider(this).get(ClipViewModel.class);
     int index = 1;
     if (getArguments() != null) {
       index = getArguments().getInt(ARG_SECTION_NUMBER);
     }
-    pageViewModel.setIndex(index);
+    clipViewModel.setIndex(index);
   }
 
   @Override

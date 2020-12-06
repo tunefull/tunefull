@@ -9,4 +9,6 @@
   <string name="tunefull_logo">TuneFull Logo</string>
   <string name="login_with_spotify">Login with Spotify</string>
   <string name="connected">Connected to Spotify!</string>
+  <string name="playing_music">Playing music</string>
+  <string name="clip_feed">Clip feed</string>
 </resources>

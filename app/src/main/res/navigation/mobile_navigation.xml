@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/mobile_navigation">
+  <fragment
+    android:id="@+id/navigation_feed"
+    android:label="@string/clip_feed"
+    android:name="edu.cnm.deepdive.tunefull.ui.main.ClipFeedFragment"
+    tools:layout="@layout/fragment_clip_feed">
+    <argument
+      android:name="feed_type"
+      app:argType="edu.cnm.deepdive.tunefull.ui.main.ClipFeedFragment$FeedType"/>
+    <action
+      android:id="@+id/open_spotify"
+      app:destination="@id/navigation_spotify">
+      <argument
+        android:name="clip"
+        app:argType="edu.cnm.deepdive.tunefull.model.Clip"/>
+    </action>
+
+  </fragment>
+
+  <fragment
+    android:id="@+id/navigation_profile"
+    android:label="@string/profile"
+    android:name="edu.cnm.deepdive.tunefull.controller.ProfileFragment"
+    tools:layout="@layout/fragment_profile"/>
+
+  <fragment
+    android:id="@+id/navigation_spotify"
+    android:label="@string/playing_music"
+    android:name="edu.cnm.deepdive.tunefull.controller.SpotifyFragment"
+    tools:layout="@layout/fragment_spotify"/>
+
+</navigation>

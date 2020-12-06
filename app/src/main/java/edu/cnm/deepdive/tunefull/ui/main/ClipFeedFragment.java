@@ -6,14 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import edu.cnm.deepdive.tunefull.R;
+import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
 
 public class ClipFeedFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
-  private PageViewModel pageViewModel;
+
+  private NavController navController;
+  private ClipViewModel clipViewModel;
   private FragmentClipFeedBinding binding;
   private int index;
 
@@ -28,21 +33,38 @@ public class ClipFeedFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
-    index = 1;
-    if (getArguments() != null) {
-      index = getArguments().getInt(ARG_SECTION_NUMBER);
-    }
-    pageViewModel.setIndex(index);
+    clipViewModel = new ViewModelProvider(this).get(ClipViewModel.class);
+    int index = (getArguments() != null) ? index = getArguments().getInt(ARG_SECTION_NUMBER) : 1;
+    clipViewModel.setIndex(index);
   }
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentClipFeedBinding.inflate(inflater);
-    binding.sectionLabel.setText((index == 0)? R.string.discovery : R.string.feed);
-    // TODO why isn't this working correctly? Is index not ever zero?
+//    navController = NavHostFragment.findNavController(this);
+    binding.sectionLabel.setText((clipViewModel.getFeedType() == FeedType.DISCOVERY) ?
+        R.string.discovery : R.string.feed);
     return binding.getRoot();
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
+    clipViewModel.getClips().observe(lifecycleOwner, (clips) -> {
+          ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
+              clips,
+              (playButton) -> {
+                //TODO navigate to SpotifyFragment
+              },
+              (addFriendButton) -> {
+                //TODO create relationship request
+              },
+              clipViewModel.getFeedType()
+          );
+        }
+    );
   }
 
   public enum FeedType {

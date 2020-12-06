@@ -1,25 +1,34 @@
 package edu.cnm.deepdive.tunefull.model;
 
+import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 public class Clip {
 
   private long id;
 
+  @Expose
   private String songTitle;
 
+  @Expose
   private String artist;
 
+  @Expose
   private String album;
 
+  @Expose
   private String trackKey;
 
+  @Expose
   private int beginTimestamp;
 
+  @Expose
   private int endTimestamp;
 
+  @Expose
   private Date dateTimePosted;
 
+  @Expose
   private User user;
 
   public long getId() {
