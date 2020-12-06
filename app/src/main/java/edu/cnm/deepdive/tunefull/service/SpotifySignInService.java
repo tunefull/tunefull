@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import edu.cnm.deepdive.tunefull.R;
@@ -81,6 +82,9 @@ public class SpotifySignInService {
             // TODO update shared preferences
             if (tokenResponse != null) {
               context.startActivity(successIntent);
+              // TODO remove after development complete
+              Log.d(getClass().getSimpleName(), String.valueOf(tokenResponse));
+
             } else {
               context.startActivity(failureIntent);
             }
