@@ -121,6 +121,9 @@ dependencies {
     //OpenId dependency (Spotify Sign In)
     implementation 'net.openid:appauth:0.7.1'
 
+    // Spotify Remote dependency
+    implementation project(':spotify-app-remote')
+
     // TODO remove this dependency on completion
     // Stetho (inspection) dependency
     implementation 'com.facebook.stetho:stetho:1.5.1'
