@@ -117,7 +117,6 @@ public class SpotifySignInService {
     );
   }
 
-  // TODO this doesn't seem to be getting the right state, or maybe the other one isn't writing the right state?
   private AuthState getAuthState() {
     try {
       String authState = preferences.getString(AUTH_STATE_KEY, null);
