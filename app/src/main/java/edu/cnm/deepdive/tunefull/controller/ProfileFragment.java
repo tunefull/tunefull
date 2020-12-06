@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
 import edu.cnm.deepdive.tunefull.ui.main.PageViewModel;
 
@@ -39,8 +40,8 @@ public class ProfileFragment extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-      binding = FragmentProfileBinding.inflate(inflater);
-    pageViewModel.getText().observe(getViewLifecycleOwner(), s -> binding.sectionLabel.setText(s));
+    binding = FragmentProfileBinding.inflate(inflater);
+    binding.sectionLabel.setText(R.string.profile);
     return binding.getRoot();
   }
 

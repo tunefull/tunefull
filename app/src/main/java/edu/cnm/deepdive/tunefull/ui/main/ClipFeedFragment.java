@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
 
 public class ClipFeedFragment extends Fragment {
@@ -14,6 +15,7 @@ public class ClipFeedFragment extends Fragment {
   private static final String ARG_SECTION_NUMBER = "section_number";
   private PageViewModel pageViewModel;
   private FragmentClipFeedBinding binding;
+  private int index;
 
   public static ClipFeedFragment newInstance(int index) {
     ClipFeedFragment fragment = new ClipFeedFragment();
@@ -27,7 +29,7 @@ public class ClipFeedFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
-    int index = 1;
+    index = 1;
     if (getArguments() != null) {
       index = getArguments().getInt(ARG_SECTION_NUMBER);
     }
@@ -38,7 +40,8 @@ public class ClipFeedFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentClipFeedBinding.inflate(inflater);
-    pageViewModel.getText().observe(getViewLifecycleOwner(), s -> binding.sectionLabel.setText(s));
+    binding.sectionLabel.setText((index == 0)? R.string.discovery : R.string.feed);
+    // TODO why isn't this working correctly? Is index not ever zero?
     return binding.getRoot();
   }
 }
