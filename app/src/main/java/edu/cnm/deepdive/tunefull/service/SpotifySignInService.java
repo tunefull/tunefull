@@ -4,14 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import edu.cnm.deepdive.tunefull.R;
 import io.reactivex.Single;
 import net.openid.appauth.AuthState;
-import net.openid.appauth.AuthState.AuthStateAction;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
@@ -21,6 +21,8 @@ import net.openid.appauth.ResponseTypeValues;
 
 public class SpotifySignInService {
 
+  private static final String AUTH_STATE_KEY = "auth_state";
+
   @SuppressLint("StaticFieldLeak")
   private static Context context;
   private final AuthState authState;
@@ -28,14 +30,19 @@ public class SpotifySignInService {
   private final String clientId;
   private final Uri redirectUri;
   private final String authScope;
+  private final SharedPreferences preferences;
 
   private SpotifySignInService() {
-    // TODO Look for auth state in shared preferences
-    AuthorizationServiceConfiguration serviceConfig = new AuthorizationServiceConfiguration(
-        Uri.parse(context.getString(R.string.authorization_endpoint_uri)),
-        Uri.parse(context.getString(R.string.token_endpoint_uri)));
-    authState = new AuthState(serviceConfig);
-    // TODO update shared preferences
+    preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    AuthState authState = getAuthState();
+    if (authState == null) {
+      AuthorizationServiceConfiguration serviceConfig = new AuthorizationServiceConfiguration(
+          Uri.parse(context.getString(R.string.authorization_endpoint_uri)),
+          Uri.parse(context.getString(R.string.token_endpoint_uri)));
+      authState = new AuthState(serviceConfig);
+      setAuthState(authState);
+    }
+    this.authState = authState;
     service = new AuthorizationService(context);
     clientId = context.getString(R.string.client_id);
     redirectUri = Uri.parse(context.getString(R.string.redirect_uri));
@@ -53,6 +60,7 @@ public class SpotifySignInService {
   public void startSignIn(AppCompatActivity activity, int requestCode,
       Class<? extends AppCompatActivity> completedActivity,
       Class<? extends AppCompatActivity> cancelledActivity) {
+    //noinspection ConstantConditions
     AuthorizationRequest request = new AuthorizationRequest.Builder(
         authState.getAuthorizationServiceConfiguration(), clientId,
         ResponseTypeValues.CODE, redirectUri)
@@ -70,21 +78,21 @@ public class SpotifySignInService {
     );
   }
 
-  public void completeSignIn(AppCompatActivity activity, AuthorizationResponse response, AuthorizationException ex,
+  public void completeSignIn(AppCompatActivity activity, AuthorizationResponse response,
+      AuthorizationException ex,
       Intent successIntent, Intent failureIntent) {
     authState.update(response, ex);
-    // TODO update shared preferences
+    setAuthState(authState);
     if (response != null) {
-      new AuthorizationService(activity).performTokenRequest(
+      service.performTokenRequest(
           response.createTokenExchangeRequest(),
           (tokenResponse, authEx) -> {
             authState.update(tokenResponse, authEx);
-            // TODO update shared preferences
+            setAuthState(authState);
             if (tokenResponse != null) {
               context.startActivity(successIntent);
-              // TODO remove after development complete
+              // TODO remove logging after development complete
               Log.d(getClass().getSimpleName(), String.valueOf(tokenResponse));
-
             } else {
               context.startActivity(failureIntent);
             }
@@ -98,21 +106,31 @@ public class SpotifySignInService {
 
   public Single<String> refresh() {
     return Single.create((emitter) ->
-        authState.performActionWithFreshTokens(service, new AuthStateAction() {
-          @Override
-          public void execute(@Nullable String accessToken, @Nullable String idToken,
-              @Nullable AuthorizationException ex) {
-            if (ex == null) {
-              emitter.onSuccess(String.format("Bearer %s", accessToken));
-            } else {
-              emitter.onError(ex);
-            }
-          }
-        })
+        authState.performActionWithFreshTokens(service,
+            (accessToken, idToken, ex) -> {
+              if (ex == null) {
+                emitter.onSuccess(String.format("Bearer %s", accessToken));
+              } else {
+                emitter.onError(ex);
+              }
+            })
     );
   }
 
-  // TODO Create a method to check if we're already logged in (combine with refresh)
+  // TODO this doesn't seem to be getting the right state, or maybe the other one isn't writing the right state?
+  private AuthState getAuthState() {
+    try {
+      String authState = preferences.getString(AUTH_STATE_KEY, null);
+      return AuthState.jsonDeserialize(authState);
+    } catch (Throwable e) {
+      return null;
+    }
+  }
+
+  private void setAuthState(AuthState authState) {
+    String newAuthState = authState.jsonSerializeString();
+    preferences.edit().putString(AUTH_STATE_KEY, newAuthState).commit();
+  }
 
   private static class InstanceHolder {
 
