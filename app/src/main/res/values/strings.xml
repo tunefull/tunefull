@@ -4,4 +4,8 @@
   <string name="feed">TuneFull Feed</string>
   <string name="profile">User Profile</string>
   <string name="login_failure_message">Unable to Sign-In with provided credentials</string>
+  <string name="integration">TuneFull integrates with</string>
+  <string name="spotify_logo">Spotify Logo</string>
+  <string name="tunefull_logo">TuneFull Logo</string>
+  <string name="login_with_spotify">Login with Spotify</string>
 </resources>

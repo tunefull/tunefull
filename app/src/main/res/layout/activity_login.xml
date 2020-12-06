@@ -5,14 +5,56 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/colorPrimary"
   tools:context=".controller.LoginActivity">
 
-  <Button
+  <ImageView
+    android:id="@+id/app_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_tunefull_logo_text"
+    android:contentDescription="@string/tunefull_logo"
+    app:layout_constraintWidth_max="@dimen/large_icon_dimen"
+    app:layout_constraintHeight_max="@dimen/large_icon_dimen"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/spotify_logo"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <TextView
+    android:id="@+id/integration"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/integration"
+    android:textSize="@dimen/large_text_size"
+    android:textColor="@color/colorPrimaryVariant"
+    app:layout_constraintTop_toBottomOf="@id/app_icon"
+    app:layout_constraintBottom_toTopOf="@id/spotify_logo"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <ImageView
+    android:id="@+id/spotify_logo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/spotify_logo_rgb_green"
+    android:contentDescription="@string/spotify_logo"
+    app:layout_constraintWidth_max="@dimen/large_icon_dimen"
+    app:layout_constraintHeight_max="@dimen/medium_icon_dimen"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/sign_in"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Login"
-    app:layout_constraintTop_toTopOf="parent"
+    android:text="@string/login_with_spotify"
+    android:backgroundTint="@color/colorPrimaryVariant"
+    android:textColor="@color/colorPrimary"
+    android:textSize="@dimen/medium_text_size"
+    app:layout_constraintTop_toTopOf="@id/spotify_logo"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>

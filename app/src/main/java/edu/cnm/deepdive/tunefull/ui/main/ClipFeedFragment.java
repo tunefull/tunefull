@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class ClipFeedFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
