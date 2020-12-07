@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
   private UserRepository userRepository; // FIXME
   private TabLayout tabs;
-  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_earth, R.drawable.ic_tunefull_logo_text, R.drawable.ic_person_24}; //FIXME
+  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_earth, R.drawable.ic_tunefull_logo_text, R.drawable.ic_person_24};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
