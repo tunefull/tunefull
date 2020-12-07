@@ -30,7 +30,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
     if (position == 0) {
-      return SpotifyFragment.newInstance(position, context);
+      return ClipFeedFragment.newInstance(position);
     }
     if (position == 1) {
       return ClipFeedFragment.newInstance(position);
