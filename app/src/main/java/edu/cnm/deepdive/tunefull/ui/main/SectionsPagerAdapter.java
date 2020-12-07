@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
+import edu.cnm.deepdive.tunefull.controller.SpotifyFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to one of the
@@ -30,7 +31,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
       return ClipFeedFragment.newInstance(position);
     }
     if (position == 1) {
-      return ClipFeedFragment.newInstance(position);
+      return SpotifyFragment.newInstance(position, context);
     }
     else {
       return ProfileFragment.newInstance(position + 1);

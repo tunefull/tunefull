@@ -15,16 +15,22 @@ import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentSpotifyBinding;
+import java.util.concurrent.TimeUnit;
 
-// TODO make this class do what we want it to, now that it works
 public class SpotifyFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
+  private static final String TRACK_FORMAT = "spotify:track:622SzYSd4p6ZahVRqS3DSv";
 
   private static String clientId;
   private static String redirectUri;
   private SpotifyAppRemote spotifyAppRemote;
   private FragmentSpotifyBinding binding;
+
+  //TODO get these things from the clip
+  private String trackId = "622SzYSd4p6ZahVRqS3DSv";
+  private long beginTimestamp = 159000;
+  private long endTimestamp = 189000;
 
   public static SpotifyFragment newInstance(int index, Context context) {
     SpotifyFragment fragment = new SpotifyFragment();
@@ -49,9 +55,10 @@ public class SpotifyFragment extends Fragment {
     return binding.getRoot();
   }
 
+  //TODO this starts playing the music as soon as the app loads, why?
   @Override
-  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
     ConnectionParams connectionParams = new ConnectionParams.Builder(clientId)
         .setRedirectUri(redirectUri)
         .showAuthView(true)
@@ -73,20 +80,15 @@ public class SpotifyFragment extends Fragment {
   }
 
   @Override
-  public void onStart() {
-    super.onStart();
-
-  }
-
-  @Override
   public void onStop() {
     super.onStop();
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
 
-  // TODO this plays a default playlist, change this
+  // TODO this doesn't play the right track for some tracks????
   private void connected() {
-    spotifyAppRemote.getPlayerApi().play("spotify:album:0JBT8Sw5eGWC86DCrobOfY");
+    spotifyAppRemote.getPlayerApi().play(String.format(TRACK_FORMAT, trackId));
+    spotifyAppRemote.getPlayerApi().seekTo(beginTimestamp);
     spotifyAppRemote.getPlayerApi()
         .subscribeToPlayerState()
         .setEventCallback((playerState) -> {
@@ -95,5 +97,12 @@ public class SpotifyFragment extends Fragment {
             Log.d("SpotifyActivity", track.name + " by " + track.artist.name);
           }
         });
+    //TODO wait for endTimestamp - beginTimestamp - but there has to be a better way to do this rather than freezing up the screen
+//    try {
+//      TimeUnit.MILLISECONDS.sleep(endTimestamp - beginTimestamp);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+    spotifyAppRemote.getPlayerApi().pause();
   }
 }

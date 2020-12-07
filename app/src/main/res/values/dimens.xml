@@ -16,4 +16,5 @@
   <dimen name="medium_icon_dimen">40dp</dimen>
   <dimen name="card_horizontal_dimen">375dp</dimen>
   <dimen name="card_vertical_dimen">100dp</dimen>
+  <dimen name="tab_padding">12dp</dimen>
 </resources>

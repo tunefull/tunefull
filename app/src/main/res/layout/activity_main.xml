@@ -24,7 +24,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/large_margin"
       android:background="@color/colorPrimary"
-      app:tabPaddingBottom="8dp"
+      app:tabPaddingBottom="@dimen/tab_padding"
       app:tabIndicatorColor="@color/colorAccent"/>
   </com.google.android.material.appbar.AppBarLayout>
 
