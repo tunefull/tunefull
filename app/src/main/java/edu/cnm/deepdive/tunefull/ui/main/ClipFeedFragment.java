@@ -19,7 +19,7 @@ public class ClipFeedFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
 
-//  private NavController navController;
+  private NavController navController;
   private ClipViewModel clipViewModel;
   private FragmentClipFeedBinding binding;
   private int index;
@@ -45,7 +45,7 @@ public class ClipFeedFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentClipFeedBinding.inflate(inflater);
-//    navController = NavHostFragment.findNavController(this);
+    navController = NavHostFragment.findNavController(this);
     binding.sectionLabel.setText((clipViewModel.getFeedType() == FeedType.DISCOVERY) ?
         R.string.discovery : R.string.feed);
     return binding.getRoot();
@@ -59,7 +59,7 @@ public class ClipFeedFragment extends Fragment {
           ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
               clips,
               clip -> {
-//                navController.navigate(ClipFeedFragmentDirections.openSpotify(clip));
+                navController.navigate(ClipFeedFragmentDirections.openSpotify("hello"));
               },
               (clip) -> {
                 User user = clip.getUser();

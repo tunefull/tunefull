@@ -1,8 +1,6 @@
 package edu.cnm.deepdive.tunefull.ui.main;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -10,7 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
-import edu.cnm.deepdive.tunefull.controller.SpotifyFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to one of the

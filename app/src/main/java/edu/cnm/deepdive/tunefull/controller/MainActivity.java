@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     viewPager.setAdapter(sectionsPagerAdapter);
     tabs = findViewById(R.id.tabs);
     tabs.setupWithViewPager(viewPager);
-    setUpTabIcons();
+    setUpTabs();
 
     // FIXME (this is just temporary to verify roundtrip)
     userRepository = new UserRepository(this);
@@ -39,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
         );
   }
 
-  // TODO change this method to make the icons bigger and to keep the highlighting
-  // for which item is currently selected
-  private void setUpTabIcons() {
+  private void setUpTabs() {
     for (int i = 0; i < TAB_ICONS.length; i++) {
       ImageView imageView = new ImageView(getApplicationContext());
       imageView.setImageResource(TAB_ICONS[i]);
