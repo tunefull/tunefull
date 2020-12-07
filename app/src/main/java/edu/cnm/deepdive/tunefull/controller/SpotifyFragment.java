@@ -86,7 +86,7 @@ public class SpotifyFragment extends Fragment {
 
   // TODO this plays a default playlist, change this
   private void connected() {
-    spotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
+    spotifyAppRemote.getPlayerApi().play("spotify:album:0JBT8Sw5eGWC86DCrobOfY");
     spotifyAppRemote.getPlayerApi()
         .subscribeToPlayerState()
         .setEventCallback((playerState) -> {

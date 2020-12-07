@@ -29,11 +29,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-    if (position == 1) {
-      return SpotifyFragment.newInstance(position + 1, context);
+    if (position == 0) {
+      return SpotifyFragment.newInstance(position, context);
     }
-    if (position < 2) {
-      return ClipFeedFragment.newInstance(position + 1);
+    if (position == 1) {
+      return ClipFeedFragment.newInstance(position);
     }
     else {
       return ProfileFragment.newInstance(position + 1);

@@ -9,15 +9,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
+import edu.cnm.deepdive.tunefull.model.User;
 
 public class ClipFeedFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
 
-  private NavController navController;
+//  private NavController navController;
   private ClipViewModel clipViewModel;
   private FragmentClipFeedBinding binding;
   private int index;
@@ -30,11 +32,12 @@ public class ClipFeedFragment extends Fragment {
     return fragment;
   }
 
+  // TODO Figure out a way to reuse this fragment for the user's posted clips
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     clipViewModel = new ViewModelProvider(this).get(ClipViewModel.class);
-    int index = (getArguments() != null) ? index = getArguments().getInt(ARG_SECTION_NUMBER) : 1;
+    int index = (getArguments() != null) ? getArguments().getInt(ARG_SECTION_NUMBER) : 0;
     clipViewModel.setIndex(index);
   }
 
@@ -55,11 +58,12 @@ public class ClipFeedFragment extends Fragment {
     clipViewModel.getClips().observe(lifecycleOwner, (clips) -> {
           ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
               clips,
-              (playButton) -> {
-                //TODO navigate to SpotifyFragment
+              clip -> {
+//                navController.navigate(ClipFeedFragmentDirections.openSpotify(clip));
               },
-              (addFriendButton) -> {
-                //TODO create relationship request
+              (clip) -> {
+                User user = clip.getUser();
+                // Post a new relationship between the current user and this user
               },
               clipViewModel.getFeedType()
           );
@@ -68,6 +72,6 @@ public class ClipFeedFragment extends Fragment {
   }
 
   public enum FeedType {
-    DISCOVERY, FRIENDS_FOLLOWS
+    DISCOVERY, FRIENDS_FOLLOWS, ME
   }
 }

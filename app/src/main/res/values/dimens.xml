@@ -12,4 +12,6 @@
 
   <dimen name="large_icon_dimen">200dp</dimen>
   <dimen name="medium_icon_dimen">100dp</dimen>
+  <dimen name="card_horizontal_dimen">375dp</dimen>
+  <dimen name="card_vertical_dimen">75dp</dimen>
 </resources>

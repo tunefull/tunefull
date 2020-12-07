@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         );
   }
 
+  // TODO change this method to make the icons bigger and to keep the highlighting
+  // for which item is currently selected
   private void setUpTabIcons() {
     for (int i = 0; i < TAB_ICONS.length; i++) {
       ImageView imageView = new ImageView(getApplicationContext());

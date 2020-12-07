@@ -12,7 +12,7 @@ public class ClipViewModel extends ViewModel {
   private MutableLiveData<List<Clip>> discoveryClips;
   private MutableLiveData<List<Clip>> feedClips;
   private MutableLiveData<Integer> index;
-  private FeedType feedType;
+  private FeedType feedType = FeedType.ME;
 
   public ClipViewModel() {
     discoveryClips = new MutableLiveData<>();

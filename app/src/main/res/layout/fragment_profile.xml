@@ -25,5 +25,87 @@
     tools:layout_constraintLeft_creator="1"
     tools:layout_constraintTop_creator="1"/>
 
+<!--fix colors for all of these-->
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/set_genre"
+    android:layout_width="@dimen/card_horizontal_dimen"
+    android:layout_height="@dimen/card_vertical_dimen"
+    android:backgroundTint="@color/colorPrimaryCards"
+    android:text="@string/set_your_genre_mood"
+    android:textSize="@dimen/medium_text_size"
+    android:textAllCaps="false"
+    app:icon="@drawable/ic_mood_24"
+    app:layout_constraintTop_toBottomOf="@id/section_label"
+    app:layout_constraintBottom_toTopOf="@id/my_clips"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/my_clips"
+    android:layout_width="@dimen/card_horizontal_dimen"
+    android:layout_height="@dimen/card_vertical_dimen"
+    android:backgroundTint="@color/colorPrimaryCards"
+    android:text="@string/my_clips"
+    android:textSize="@dimen/medium_text_size"
+    android:textAllCaps="false"
+    app:icon="@drawable/ic_clips_24"
+    app:layout_constraintTop_toBottomOf="@id/set_genre"
+    app:layout_constraintBottom_toTopOf="@id/friend_requests"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/friend_requests"
+    android:layout_width="@dimen/card_horizontal_dimen"
+    android:layout_height="@dimen/card_vertical_dimen"
+    android:backgroundTint="@color/colorPrimaryCards"
+    android:text="@string/friend_requests"
+    android:textSize="@dimen/medium_text_size"
+    android:textAllCaps="false"
+    app:icon="@drawable/ic_friend_requests_24"
+    app:layout_constraintTop_toBottomOf="@id/my_clips"
+    app:layout_constraintBottom_toTopOf="@id/my_friends_follows"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/my_friends_follows"
+    android:layout_width="@dimen/card_horizontal_dimen"
+    android:layout_height="@dimen/card_vertical_dimen"
+    android:backgroundTint="@color/colorPrimaryCards"
+    android:text="@string/my_friends_follows"
+    android:textSize="@dimen/medium_text_size"
+    android:textAllCaps="false"
+    app:icon="@drawable/ic_friends_24"
+    app:layout_constraintTop_toBottomOf="@id/friend_requests"
+    app:layout_constraintBottom_toTopOf="@id/settings"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/settings"
+    android:layout_width="@dimen/card_horizontal_dimen"
+    android:layout_height="@dimen/card_vertical_dimen"
+    android:backgroundTint="@color/colorPrimaryCards"
+    android:text="@string/settings"
+    android:textSize="@dimen/medium_text_size"
+    android:textAllCaps="false"
+    app:icon="@drawable/ic_settings_24"
+    app:layout_constraintTop_toBottomOf="@id/my_friends_follows"
+    app:layout_constraintBottom_toTopOf="@id/new_clip"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/new_clip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/fab_margin"
+    android:layout_gravity="bottom|end"
+    android:src="@drawable/ic_add_clip_24"
+    android:contentDescription="@string/create_a_new_clip"
+    app:layout_constraintTop_toBottomOf="@id/settings"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
