@@ -25,6 +25,14 @@
     tools:layout_constraintLeft_creator="1"
     tools:layout_constraintTop_creator="1"/>
 
+  <Button
+    android:id="@+id/text_switch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="test"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/clip_recycler"
     android:layout_width="0dp"

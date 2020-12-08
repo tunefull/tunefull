@@ -13,9 +13,7 @@ public class User {
   private String email;
 
   @Expose
-  private String genre;
-
-  private String oauth;
+  private Genre genre;
 
   public long getId() {
     return id;
@@ -41,19 +39,20 @@ public class User {
     this.email = email;
   }
 
-  public String getGenre() {
+  public Genre getGenre() {
     return genre;
   }
 
-  public void setGenre(String genre) {
+  public void setGenre(Genre genre) {
     this.genre = genre;
   }
 
-  public String getOauth() {
-    return oauth;
-  }
-
-  public void setOauth(String oauth) {
-    this.oauth = oauth;
+  /**
+   * The {@code Genre} enum enumerates different musical genres that the user can select from for
+   * their favorite genre.
+   */
+  public enum Genre {
+    CLASSICAL, ROCK_N_ROLL, POP, JAZZ, METAL, HIPHOP, R_AND_B, BLUES, FOLK, OPERA, ELECTRONIC,
+    ALTERNATIVE, PUNK, REGGAE, CLASSIC_ROCK, DISCO, SWING, FUNK, COUNTRY, CONJUNTO, LATIN, FILM
   }
 }

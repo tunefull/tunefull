@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--  fixme-->
+
+  <TextView
+    android:id="@+id/post_clip"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/post_clip"
+    android:textColor="@color/textColor"
+    android:textAllCaps="false"
+    android:textAlignment="center"
+    android:background="@color/colorPrimaryCards"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <TextView
+    android:id="@+id/post_clip_message"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/post_clip_message"
+    android:textColor="@color/colorPrimary"
+    android:textAlignment="center"
+    app:layout_constraintTop_toBottomOf="@id/post_clip"
+    app:layout_constraintBottom_toTopOf="@id/begin_timestamp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.slider.Slider
+    android:id="@+id/begin_timestamp"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:valueFrom="0"
+    android:value="0"
+    android:stepSize="1"
+    app:labelBehavior="floating"
+    app:layout_constraintTop_toBottomOf="@id/post_clip"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

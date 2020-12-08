@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
@@ -37,7 +38,7 @@ public class ClipFeedFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    clipViewModel = new ViewModelProvider(this).get(ClipViewModel.class);
+    clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
     int index = (getArguments() != null) ? getArguments().getInt(ARG_SECTION_NUMBER) : 0;
     clipViewModel.setIndex(index);
   }
@@ -46,9 +47,12 @@ public class ClipFeedFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentClipFeedBinding.inflate(inflater);
-    navController = NavHostFragment.findNavController(this);
+//    navController = Navigation.findNavController(binding.getRoot());
     binding.sectionLabel.setText((clipViewModel.getFeedType() == FeedType.DISCOVERY) ?
         R.string.discovery : R.string.feed);
+    binding.textSwitch.setOnClickListener((v) -> {
+      ((MainActivity) getActivity()).testSwitch();
+    });
     return binding.getRoot();
   }
 

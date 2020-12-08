@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment;
+import edu.cnm.deepdive.tunefull.controller.NestedFragment;
 import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 
 /**
@@ -34,7 +35,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
       return ClipFeedFragment.newInstance(position);
     }
     else {
-      return ProfileFragment.newInstance(position + 1);
+//      return ProfileFragment.newInstance(position);
+      return new NestedFragment();
     }
   }
 

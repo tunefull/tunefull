@@ -46,4 +46,9 @@ public class MainActivity extends AppCompatActivity {
       tabs.getTabAt(i).setCustomView(imageView);
     }
   }
+
+  public void testSwitch() {
+    ViewPager viewPager = findViewById(R.id.view_pager);
+    viewPager.setCurrentItem(2, true);
+  }
 }
