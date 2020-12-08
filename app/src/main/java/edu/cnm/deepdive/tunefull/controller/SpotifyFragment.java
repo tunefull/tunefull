@@ -15,12 +15,12 @@ import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentSpotifyBinding;
-import java.util.concurrent.TimeUnit;
 
+// TODO make this into a dialog instead??
 public class SpotifyFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
-  private static final String TRACK_FORMAT = "spotify:track:622SzYSd4p6ZahVRqS3DSv";
+  private static final String TRACK_FORMAT = "spotify:track:%s";
 
   private static String clientId;
   private static String redirectUri;
@@ -85,7 +85,7 @@ public class SpotifyFragment extends Fragment {
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
 
-  // TODO this doesn't play the right track for some tracks????
+  // TODO this doesn't play the right track for some tracks???? It changes based on the login??
   private void connected() {
     spotifyAppRemote.getPlayerApi().play(String.format(TRACK_FORMAT, trackId));
     spotifyAppRemote.getPlayerApi().seekTo(beginTimestamp);

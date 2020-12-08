@@ -13,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
 import edu.cnm.deepdive.tunefull.ui.main.ClipViewModel;
-import org.jetbrains.annotations.NotNull;
 
 public class ProfileFragment extends Fragment {
 
@@ -50,11 +49,12 @@ public class ProfileFragment extends Fragment {
     return binding.getRoot();
   }
 
+  // TODO navigation
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     binding.myClips.setOnClickListener((v) -> {
-      navController.navigate(ProfileFragmentDirections.openSpotify());
+//      navController.navigate(ProfileFragmentDirections.openSpotify());
     });
   }
 }

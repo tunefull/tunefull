@@ -25,7 +25,6 @@
     tools:layout_constraintLeft_creator="1"
     tools:layout_constraintTop_creator="1"/>
 
-  <!--TODO fix colors for all of these icons-->
   <com.google.android.material.button.MaterialButton
     android:id="@+id/set_genre"
     android:layout_width="@dimen/card_horizontal_dimen"
@@ -35,6 +34,7 @@
     android:textSize="@dimen/medium_text_size"
     android:textAllCaps="false"
     app:icon="@drawable/ic_mood_24"
+    app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/section_label"
     app:layout_constraintBottom_toTopOf="@id/my_clips"
@@ -50,6 +50,7 @@
     android:textSize="@dimen/medium_text_size"
     android:textAllCaps="false"
     app:icon="@drawable/ic_clips_24"
+    app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/set_genre"
     app:layout_constraintBottom_toTopOf="@id/friend_requests"
@@ -65,6 +66,7 @@
     android:textSize="@dimen/medium_text_size"
     android:textAllCaps="false"
     app:icon="@drawable/ic_friend_requests_24"
+    app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/my_clips"
     app:layout_constraintBottom_toTopOf="@id/my_friends_follows"
@@ -80,6 +82,7 @@
     android:textSize="@dimen/medium_text_size"
     android:textAllCaps="false"
     app:icon="@drawable/ic_friends_24"
+    app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/friend_requests"
     app:layout_constraintBottom_toTopOf="@id/settings"
@@ -95,6 +98,7 @@
     android:textSize="@dimen/medium_text_size"
     android:textAllCaps="false"
     app:icon="@drawable/ic_settings_24"
+    app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/my_friends_follows"
     app:layout_constraintBottom_toBottomOf="parent"

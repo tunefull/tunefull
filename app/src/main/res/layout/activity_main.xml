@@ -37,6 +37,7 @@
     android:layout_gravity="bottom|end"
     android:src="@drawable/ic_tunefull_logo_add_simple"
     android:contentDescription="@string/create_a_new_clip"
+    app:tint="@color/colorPrimary"
     app:layout_constraintTop_toBottomOf="@id/settings"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
