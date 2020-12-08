@@ -8,14 +8,14 @@ import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
-public class SongViewModel extends ViewModel {
+public class TrackViewModel extends ViewModel {
 
   private final MutableLiveData<List<Track>> tracks;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
   private final SpotifySignInService signInService;
 
-  public SongViewModel() {
+  public TrackViewModel() {
     tracks = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();

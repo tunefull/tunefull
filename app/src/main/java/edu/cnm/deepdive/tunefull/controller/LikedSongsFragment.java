@@ -13,13 +13,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import edu.cnm.deepdive.tunefull.adapter.LikedSongsRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentLikedSongsBinding;
-import edu.cnm.deepdive.tunefull.viewmodel.SongViewModel;
+import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
 
 public class LikedSongsFragment extends Fragment {
 
   private NavController navController;
   private FragmentLikedSongsBinding binding;
-  private SongViewModel songViewModel;
+  private TrackViewModel trackViewModel;
 
   @Nullable
   @Override
@@ -27,7 +27,7 @@ public class LikedSongsFragment extends Fragment {
       @Nullable Bundle savedInstanceState) {
     binding = FragmentLikedSongsBinding.inflate(inflater);
     navController = NavHostFragment.findNavController(this);
-    songViewModel = new ViewModelProvider(this).get(SongViewModel.class);
+    trackViewModel = new ViewModelProvider(this).get(TrackViewModel.class);
     return binding.getRoot();
   }
 
@@ -35,7 +35,7 @@ public class LikedSongsFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
-    songViewModel.getTracks().observe(lifecycleOwner, (tracks) -> {
+    trackViewModel.getTracks().observe(lifecycleOwner, (tracks) -> {
       LikedSongsRecyclerAdapter adapter = new LikedSongsRecyclerAdapter(getContext(), tracks,
           (track) -> {
             //play the track
