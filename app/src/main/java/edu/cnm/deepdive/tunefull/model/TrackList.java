@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.spotify.protocol.types.Track;
 import java.util.List;
 
+//TODO probably take this out - I don't think it's needed.
 public class TrackList {
 
   @Expose

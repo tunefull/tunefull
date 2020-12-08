@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.tunefull.ui.main;
+package edu.cnm.deepdive.tunefull.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,20 +6,21 @@ import androidx.lifecycle.ViewModel;
 import edu.cnm.deepdive.tunefull.model.Clip;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import edu.cnm.deepdive.tunefull.service.TunefullWebService;
-import edu.cnm.deepdive.tunefull.ui.main.ClipFeedFragment.FeedType;
+import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 
 public class ClipViewModel extends ViewModel {
 
-  private MutableLiveData<List<Clip>> clips;
-  private MutableLiveData<Integer> index;
-  private FeedType feedType = FeedType.ME;
-  private CompositeDisposable pending;
+  private final MutableLiveData<List<Clip>> clips;
+  private final MutableLiveData<Integer> index;
+  private final MutableLiveData<Throwable> throwable;
+  private final CompositeDisposable pending;
   private final SpotifySignInService signInService;
   private final TunefullWebService webService;
-  private final MutableLiveData<Throwable> throwable;
+
+  private FeedType feedType = FeedType.ME;
 
   public ClipViewModel() {
     clips = new MutableLiveData<>();

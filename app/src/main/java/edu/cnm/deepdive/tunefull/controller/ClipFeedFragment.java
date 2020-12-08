@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.tunefull.ui.main;
+package edu.cnm.deepdive.tunefull.controller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
 import edu.cnm.deepdive.tunefull.model.User;
+import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 
 public class ClipFeedFragment extends Fragment {
 
@@ -59,7 +60,7 @@ public class ClipFeedFragment extends Fragment {
           ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
               clips,
               clip -> {
-                navController.navigate(ClipFeedFragmentDirections.openSpotify("hello"));
+//                navController.navigate(ClipFeedFragmentDirections.openSpotify("hello"));
               },
               (clip) -> {
                 User user = clip.getUser();

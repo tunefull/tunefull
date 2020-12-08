@@ -10,7 +10,7 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter.Holder;
 import edu.cnm.deepdive.tunefull.databinding.ItemClipBinding;
 import edu.cnm.deepdive.tunefull.model.Clip;
-import edu.cnm.deepdive.tunefull.ui.main.ClipFeedFragment.FeedType;
+import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import java.util.List;
 
 public class ClipRecyclerAdapter extends RecyclerView.Adapter<Holder> {

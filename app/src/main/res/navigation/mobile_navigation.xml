@@ -8,11 +8,11 @@
   <fragment
     android:id="@+id/navigation_feed"
     android:label="@string/clip_feed"
-    android:name="edu.cnm.deepdive.tunefull.ui.main.ClipFeedFragment"
+    android:name="edu.cnm.deepdive.tunefull.controller.ClipFeedFragment"
     tools:layout="@layout/fragment_clip_feed">
     <argument
       android:name="feed_type"
-      app:argType="edu.cnm.deepdive.tunefull.ui.main.ClipFeedFragment$FeedType"/>
+      app:argType="edu.cnm.deepdive.tunefull.controller.ClipFeedFragment$FeedType"/>
     <action
       android:id="@+id/open_spotify"
       app:destination="@id/navigation_spotify">

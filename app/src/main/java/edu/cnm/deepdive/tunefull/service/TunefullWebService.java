@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.tunefull.BuildConfig;
 import edu.cnm.deepdive.tunefull.model.Clip;
 import edu.cnm.deepdive.tunefull.model.User;
-import edu.cnm.deepdive.tunefull.ui.main.ClipViewModel.Source;
+import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel.Source;
 import io.reactivex.Single;
 import java.util.List;
 import okhttp3.OkHttpClient;
@@ -14,7 +14,6 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 

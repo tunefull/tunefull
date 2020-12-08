@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.service.UserRepository;
-import edu.cnm.deepdive.tunefull.ui.main.SectionsPagerAdapter;
+import edu.cnm.deepdive.tunefull.adapter.SectionsPagerAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends AppCompatActivity {

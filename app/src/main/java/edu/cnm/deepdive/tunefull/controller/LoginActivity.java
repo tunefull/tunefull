@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
 import edu.cnm.deepdive.tunefull.databinding.ActivityLoginBinding;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 
 public class LoginActivity extends AppCompatActivity {
 
   private ActivityLoginBinding binding;
+
 
   @SuppressLint("CheckResult")
   @Override
@@ -31,5 +33,9 @@ public class LoginActivity extends AppCompatActivity {
               });
             }
         );
+  // TODO check if the spotify app has been installed someplace in this activity
+    if (!SpotifyAppRemote.isSpotifyInstalled(this)) {
+      //do something to tell user that they must install and sign into spotify first
+    }
   }
 }

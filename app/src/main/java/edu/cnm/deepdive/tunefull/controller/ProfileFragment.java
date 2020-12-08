@@ -12,7 +12,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
-import edu.cnm.deepdive.tunefull.ui.main.ClipViewModel;
+import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 
 public class ProfileFragment extends Fragment {
 
