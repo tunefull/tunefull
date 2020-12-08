@@ -3,6 +3,7 @@ package edu.cnm.deepdive.tunefull.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.model.Clip;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import edu.cnm.deepdive.tunefull.service.TunefullWebService;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class ClipViewModel extends ViewModel {
 
+  private final MutableLiveData<Clip> clip;
   private final MutableLiveData<List<Clip>> clips;
   private final MutableLiveData<Integer> index;
   private final MutableLiveData<Throwable> throwable;
@@ -23,6 +25,7 @@ public class ClipViewModel extends ViewModel {
   private FeedType feedType = FeedType.ME;
 
   public ClipViewModel() {
+    clip = new MutableLiveData<>();
     clips = new MutableLiveData<>();
     index = new MutableLiveData<>();
     pending = new CompositeDisposable();
@@ -60,6 +63,11 @@ public class ClipViewModel extends ViewModel {
         )
     );
     return clips;
+  }
+
+  public LiveData<Clip> postClip(Track track, long beginTimestamp, long endTimestamp) {
+    //TODO fix this method
+    return clip;
   }
 
   /**

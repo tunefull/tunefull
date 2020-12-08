@@ -1,40 +1,52 @@
 package edu.cnm.deepdive.tunefull.viewmodel;
 
+import android.app.Application;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import com.spotify.protocol.types.Track;
-import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
+import edu.cnm.deepdive.tunefull.service.SpotifyRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
-public class TrackViewModel extends ViewModel {
+public class TrackViewModel extends AndroidViewModel {
 
+  private final MutableLiveData<Track> track;
   private final MutableLiveData<List<Track>> tracks;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-  private final SpotifySignInService signInService;
+  private final SpotifyRepository spotifyRepository;
 
-  public TrackViewModel() {
+  //TODO make all viewmodels extend androidviewmodel
+  public TrackViewModel(Application application) {
+    super(application);
+    track = new MutableLiveData<>();
     tracks = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
-    signInService = SpotifySignInService.getInstance();
+    spotifyRepository = new SpotifyRepository(application);
+    loadTracks();
   }
 
   public LiveData<List<Track>> getTracks() {
-//    TODO add spotify webservice class? or does the sdk automatically let us get tracks - if so, how?
-//    pending.add(
-//        signInService.refresh()
-//            .observeOn(Schedulers.io())
-//            .flatMap((token) -> /*go to spotify api*/)
-//            .subscribe(
-//                tracks::postValue,
-//                throwable::postValue
-//            )
-//    );
     return tracks;
   }
 
+  public LiveData<Track> getTrack() {
+    return track;
+  }
 
+  public void setTrack(Track track) {
+    this.track.setValue(track);
+  }
+
+  public void loadTracks() {
+    pending.add(
+        spotifyRepository.getAll()
+        .subscribe(
+            tracks::postValue,
+            throwable::postValue
+        )
+    );
+  }
 }

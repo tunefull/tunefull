@@ -27,7 +27,7 @@ public class LikedSongsFragment extends Fragment {
       @Nullable Bundle savedInstanceState) {
     binding = FragmentLikedSongsBinding.inflate(inflater);
     navController = NavHostFragment.findNavController(this);
-    trackViewModel = new ViewModelProvider(this).get(TrackViewModel.class);
+    trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
     return binding.getRoot();
   }
 
@@ -40,8 +40,10 @@ public class LikedSongsFragment extends Fragment {
           (track) -> {
             //play the track
           },
-          v -> {
-            //pop up create-clip dialog
+          (track) -> {
+            trackViewModel.setTrack(track);
+            PostClipDialog dialog = new PostClipDialog();
+            dialog.show(getChildFragmentManager(), dialog.getClass().getSimpleName());
           });
     });
   }

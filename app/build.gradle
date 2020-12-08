@@ -52,6 +52,9 @@ android {
         resValue "string", "redirect_uri_path", redirect_uri_path
         resValue "string", "redirect_uri", "${redirect_uri_scheme}://${redirect_uri_host}${redirect_uri_path}"
 
+        buildConfigField "String", "SPOTIFY_BASE_URL",
+                quoted(getProperty(connection_properties, "spotify_base_url"))
+
         manifestPlaceholders = [
                 'appAuthRedirectScheme' : "$redirect_uri_scheme"
         ]
@@ -90,10 +93,9 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
 
     // Fragment navigation dependencies.
-    implementation 'androidx.navigation:navigation-fragment:2.3.1'
-    implementation 'androidx.navigation:navigation-ui:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // Lifecycle (LiveData and ViewModel) dependencies
     def lifecycle_version = '2.2.0'
