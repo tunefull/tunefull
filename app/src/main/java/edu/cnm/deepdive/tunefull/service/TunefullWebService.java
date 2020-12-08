@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.tunefull.BuildConfig;
 import edu.cnm.deepdive.tunefull.model.Clip;
 import edu.cnm.deepdive.tunefull.model.User;
+import edu.cnm.deepdive.tunefull.model.User.Genre;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel.Source;
 import io.reactivex.Single;
 import java.util.List;
@@ -16,6 +17,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PUT;
 
 public interface TunefullWebService {
 
@@ -27,6 +29,9 @@ public interface TunefullWebService {
 
   @GET("clips")
   Single<List<Clip>> getClips(@Header("Authorization") String bearerToken, Source source);
+
+  @PUT("users/me/genre")
+  Single<Genre> setGenre(@Header("Authorization") String bearerToken, Genre genre);
 
   class InstanceHolder {
 
