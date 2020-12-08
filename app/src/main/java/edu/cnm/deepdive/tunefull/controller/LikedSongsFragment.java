@@ -11,6 +11,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import edu.cnm.deepdive.tunefull.adapter.LikedSongsRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentLikedSongsBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.SongViewModel;
 
@@ -35,7 +36,13 @@ public class LikedSongsFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
     songViewModel.getTracks().observe(lifecycleOwner, (tracks) -> {
-    // TODO create and attach an adapter, based on the list of the user's spotify saved tracks
+      LikedSongsRecyclerAdapter adapter = new LikedSongsRecyclerAdapter(getContext(), tracks,
+          (track) -> {
+            //play the track
+          },
+          v -> {
+            //pop up create-clip dialog
+          });
     });
   }
 

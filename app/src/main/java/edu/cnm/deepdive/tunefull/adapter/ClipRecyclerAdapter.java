@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ClipRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
-  private final OnPlayButtonClickListener playListener;
+  private final OnClipPlayButtonClickListener playListener;
   private final OnAddFriendButtonClickListener addFriendListener;
   private final Context context;
   private final List<Clip> clips;
@@ -23,7 +23,7 @@ public class ClipRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   private final FeedType feedType;
 
   public ClipRecyclerAdapter(@NonNull Context context, List<Clip> clips,
-      OnPlayButtonClickListener playListener, OnAddFriendButtonClickListener addFriendListener,
+      OnClipPlayButtonClickListener playListener, OnAddFriendButtonClickListener addFriendListener,
       FeedType feedType) {
     this.context = context;
     inflater = LayoutInflater.from(context);
@@ -72,7 +72,7 @@ public class ClipRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     }
   }
 
-  public interface OnPlayButtonClickListener {
+  public interface OnClipPlayButtonClickListener {
 
     void onCLick(Clip clip);
   }

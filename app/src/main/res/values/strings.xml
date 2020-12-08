@@ -15,7 +15,7 @@
   <string name="my_clips">My clips</string>
   <string name="friend_requests">Friend requests</string>
   <string name="my_friends_follows">My friends/follows</string>
-  <string name="settings">Settings</string>
+  <string name="logout">Logout</string>
   <string name="create_a_new_clip">Create a new clip</string>
   <string name="liked_songs">Liked songs</string>
 </resources>

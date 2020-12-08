@@ -59,7 +59,7 @@ public class ClipFeedFragment extends Fragment {
     clipViewModel.getClips().observe(lifecycleOwner, (clips) -> {
           ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
               clips,
-              clip -> {
+              (clip) -> {
 //                navController.navigate(ClipFeedFragmentDirections.openSpotify("hello"));
               },
               (clip) -> {

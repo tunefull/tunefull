@@ -131,11 +131,6 @@ public class SpotifySignInService {
     preferences.edit().putString(AUTH_STATE_KEY, newAuthState).commit();
   }
 
-  public void signOut() {
-     setAuthState(new AuthState());
-  }
-
-
   private static class InstanceHolder {
 
     @SuppressLint("StaticFieldLeak")

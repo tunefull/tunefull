@@ -1,6 +1,5 @@
 package edu.cnm.deepdive.tunefull.controller;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
-import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 
 public class ProfileFragment extends Fragment {
@@ -48,13 +46,6 @@ public class ProfileFragment extends Fragment {
     navController = NavHostFragment.findNavController(this);
     binding = FragmentProfileBinding.inflate(inflater);
     binding.sectionLabel.setText(R.string.profile);
-
-    binding.settings.setOnClickListener((v) -> {
-      SpotifySignInService.getInstance().signOut();
-      Intent intent = new Intent(getContext(), LoginActivity.class)
-          .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-      startActivity(intent);
-    });
     return binding.getRoot();
   }
 
