@@ -17,6 +17,7 @@ import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
 import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
+import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
 
 public class ClipFeedFragment extends Fragment {
@@ -25,10 +26,11 @@ public class ClipFeedFragment extends Fragment {
   private static final String ARG_SECTION_NUMBER = "section_number";
   private NavController navController;
   private ClipViewModel clipViewModel;
+  private SpotifyViewModel spotifyViewModel;
+  private RelationshipViewModel relationshipViewModel;
   private FragmentClipFeedBinding binding;
   private int index;
   private SharedPreferences preferences;
-  private SpotifyViewModel spotifyViewModel;
 
   public static ClipFeedFragment newInstance(int index) {
     ClipFeedFragment fragment = new ClipFeedFragment();
@@ -79,17 +81,13 @@ public class ClipFeedFragment extends Fragment {
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
     clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
     spotifyViewModel = new ViewModelProvider(getActivity()).get(SpotifyViewModel.class);
+    relationshipViewModel = new ViewModelProvider(getActivity()).get(RelationshipViewModel.class);
     clipViewModel.setIndex(index);
     clipViewModel.getClips().observe(lifecycleOwner, (clips) -> {
           ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
               clips,
-              (clip) -> {
-//            play clip
-              },
-              (clip) -> {
-                User user = clip.getUser();
-                // Post a new relationship between the current user and this user
-              },
+              (clip) -> spotifyViewModel.play(clip),
+              (clip) -> relationshipViewModel.saveRelationship(clip.getUser()),
               clipViewModel.getFeedType()
           );
           binding.clipRecycler.setAdapter(adapter);

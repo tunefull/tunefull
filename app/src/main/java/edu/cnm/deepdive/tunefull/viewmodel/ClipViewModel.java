@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import edu.cnm.deepdive.tunefull.model.Clip;
-import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
+import edu.cnm.deepdive.tunefull.service.ClipRepository;
+import edu.cnm.deepdive.tunefull.service.GoogleSignInService;
 import edu.cnm.deepdive.tunefull.service.TunefullWebService;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 
 public class ClipViewModel extends AndroidViewModel {
@@ -20,8 +20,9 @@ public class ClipViewModel extends AndroidViewModel {
   private final MutableLiveData<Integer> index;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-  private final SpotifySignInService signInService;
+  private final GoogleSignInService signInService;
   private final TunefullWebService webService;
+  private final ClipRepository clipRepository;
 
   private FeedType feedType;
 
@@ -31,8 +32,9 @@ public class ClipViewModel extends AndroidViewModel {
     clips = new MutableLiveData<>();
     index = new MutableLiveData<>();
     pending = new CompositeDisposable();
-    signInService = SpotifySignInService.getInstance();
+    signInService = GoogleSignInService.getInstance();
     webService = TunefullWebService.getInstance();
+    clipRepository = new ClipRepository(application);
     throwable = new MutableLiveData<>();
   }
 
@@ -45,8 +47,13 @@ public class ClipViewModel extends AndroidViewModel {
     return feedType;
   }
 
-  // TODO put this stuff in repositories
   public LiveData<List<Clip>> getClips() {
+    loadClips();
+    return clips;
+  }
+
+  public void loadClips() {
+    throwable.setValue(null);
     Source source;
     if (feedType == FeedType.DISCOVERY) {
       source = Source.ALL;
@@ -56,18 +63,16 @@ public class ClipViewModel extends AndroidViewModel {
       source = Source.ME;
     }
     pending.add(
-        signInService.refresh()
-            .observeOn(Schedulers.io())
-            .flatMap((token) -> webService.getClips(token, source))
+        clipRepository.getClips(source)
             .subscribe(
                 clips::postValue,
                 throwable::postValue
             )
     );
-    return clips;
   }
 
-  public LiveData<Clip> postClip(Track track, long beginTimestamp, long endTimestamp) {
+  public void postClip(Track track, long beginTimestamp, long endTimestamp) {
+    throwable.setValue(null);
     Clip clip = new Clip();
     clip.setSongTitle(track.name);
     if (track.artist != null) {
@@ -82,15 +87,12 @@ public class ClipViewModel extends AndroidViewModel {
     clip.setBeginTimestamp(beginTimestamp);
     clip.setEndTimestamp(endTimestamp);
     pending.add(
-        signInService.refresh()
-            .observeOn(Schedulers.io())
-            .flatMap((token) -> webService.postClip(token, clip))
+        clipRepository.postClip(clip)
             .subscribe(
                 this.clip::postValue,
                 throwable::postValue
             )
     );
-    return this.clip;
   }
 
   /**

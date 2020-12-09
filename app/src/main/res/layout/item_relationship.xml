@@ -26,52 +26,28 @@
     android:orientation="vertical"/>
 
   <TextView
-    android:id="@+id/requester_name"
+    android:id="@+id/user_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/medium_text_size"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/requester_genre"
+    app:layout_constraintBottom_toTopOf="@id/user_genre"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
     tools:text="Requester"/>
 
   <TextView
-    android:id="@+id/requester_genre"
+    android:id="@+id/user_genre"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/small_text_size"
-    app:layout_constraintTop_toBottomOf="@id/requester_name"
-    app:layout_constraintBottom_toTopOf="@id/requested_name"
+    app:layout_constraintTop_toBottomOf="@id/user_name"
+    app:layout_constraintBottom_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
     tools:text="Metal"/>
-
-  <TextView
-    android:id="@+id/requested_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/textColor"
-    android:textSize="@dimen/medium_text_size"
-    app:layout_constraintTop_toBottomOf="@id/requester_genre"
-    app:layout_constraintBottom_toTopOf="@id/requested_genre"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
-    tools:text="Requested"/>
-
-  <TextView
-    android:id="@+id/requested_genre"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/textColor"
-    android:textSize="@dimen/small_text_size"
-    app:layout_constraintTop_toBottomOf="@id/requested_name"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
-    tools:text="Pop"/>
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/add_friend_button"

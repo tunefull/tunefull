@@ -77,6 +77,11 @@ public class GoogleSignInService {
     );
   }
 
+  public Single<String> refreshBearerToken() {
+    return refresh()
+        .map((account) -> String.format("Bearer %s", account.getIdToken()));
+  }
+
   /**
    * Allows the activity to start a signin request.
    *
