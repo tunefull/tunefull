@@ -37,22 +37,6 @@
     app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/section_label"
-    app:layout_constraintBottom_toTopOf="@id/my_clips"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
-
-  <com.google.android.material.button.MaterialButton
-    android:id="@+id/my_clips"
-    android:layout_width="@dimen/card_horizontal_dimen"
-    android:layout_height="@dimen/card_vertical_dimen"
-    android:backgroundTint="@color/colorPrimaryCards"
-    android:text="@string/my_clips"
-    android:textSize="@dimen/medium_text_size"
-    android:textAllCaps="false"
-    app:icon="@drawable/ic_clips_24"
-    app:iconTint="@color/colorPrimaryVariant"
-    app:iconSize="@dimen/medium_icon_dimen"
-    app:layout_constraintTop_toBottomOf="@id/set_genre"
     app:layout_constraintBottom_toTopOf="@id/friend_requests"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
@@ -68,7 +52,7 @@
     app:icon="@drawable/ic_friend_requests_24"
     app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
-    app:layout_constraintTop_toBottomOf="@id/my_clips"
+    app:layout_constraintTop_toBottomOf="@id/set_genre"
     app:layout_constraintBottom_toTopOf="@id/my_friends"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
@@ -78,7 +62,7 @@
     android:layout_width="@dimen/card_horizontal_dimen"
     android:layout_height="@dimen/card_vertical_dimen"
     android:backgroundTint="@color/colorPrimaryCards"
-    android:text="@string/my_friends_follows"
+    android:text="@string/my_friends"
     android:textSize="@dimen/medium_text_size"
     android:textAllCaps="false"
     app:icon="@drawable/ic_friends_24"

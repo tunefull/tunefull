@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment;
-import edu.cnm.deepdive.tunefull.controller.NestedFragment;
+import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 
 /**
@@ -18,7 +18,7 @@ import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @StringRes
-  private static final int[] TAB_TITLES = new int[]{R.string.discovery, R.string.feed, R.string.profile};
+  private static final int[] TAB_TITLES = new int[]{R.string.discovery, R.string.feed, R.string.my_clips, R.string.profile};
   private final Context context;
 
   public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -30,11 +30,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
   public Fragment getItem(int position) {
     if (position == 0) {
       return ClipFeedFragment.newInstance(position);
-    }
-    if (position == 1) {
+    } else if (position == 1) {
       return ClipFeedFragment.newInstance(position);
-    }
-    else {
+    } else if (position == 2) {
+      return ClipFeedFragment.newInstance(position);
+    } else {
       return ProfileFragment.newInstance(position);
 //      return new NestedFragment();
     }
@@ -48,6 +48,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public int getCount() {
-    return 3;
+    return 4;
   }
 }

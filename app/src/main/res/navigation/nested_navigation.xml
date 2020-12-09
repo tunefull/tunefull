@@ -10,9 +10,6 @@
     android:label="@string/profile"
     android:name="edu.cnm.deepdive.tunefull.controller.ProfileFragment"
     tools:layout="@layout/fragment_profile">
-    <action
-      android:id="@id/open_spotify"
-      app:destination="@id/navigation_spotify"/>
   </fragment>
 
 </navigation>

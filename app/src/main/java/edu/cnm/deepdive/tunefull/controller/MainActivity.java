@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
   private UserRepository userRepository; // FIXME
   private TabLayout tabs;
-  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_earth, R.drawable.ic_tunefull_logo_text, R.drawable.ic_person_24};
-  private static final int[] TAB_NAMES = new int[]{R.string.discovery, R.string.feed, R.string.profile};
+  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_earth, R.drawable.ic_tunefull_logo_text, R.drawable.ic_clips_24, R.drawable.ic_person_24};
+  private static final int[] TAB_NAMES = new int[]{R.string.discovery, R.string.feed, R.string.my_clips, R.string.profile};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
     for (int i = 0; i < TAB_ICONS.length; i++) {
       ImageView imageView = new ImageView(getApplicationContext());
       imageView.setImageResource(TAB_ICONS[i]);
-      imageView.setTooltipText(getText(TAB_NAMES[i]));
+      //TODO setting tooltips makes the click functionality not work
+//      imageView.setTooltipText(getText(TAB_NAMES[i]));
       tabs.getTabAt(i).setCustomView(imageView);
     }
   }
 
-  public void testSwitch() {
+  public void switchToProfile() {
     ViewPager viewPager = findViewById(R.id.view_pager);
-    viewPager.setCurrentItem(2, true);
+    viewPager.setCurrentItem(3, true);
   }
 }

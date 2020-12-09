@@ -23,7 +23,7 @@ public class ClipViewModel extends AndroidViewModel {
   private final SpotifySignInService signInService;
   private final TunefullWebService webService;
 
-  private FeedType feedType = FeedType.ME;
+  private FeedType feedType;
 
   public ClipViewModel(Application application) {
     super(application);

@@ -56,6 +56,7 @@ public class ChangeGenreDialog extends DialogFragment {
     return binding.getRoot();
   }
 
+  //TODO get genre from the webservice upon signin
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);

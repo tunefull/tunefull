@@ -3,40 +3,13 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/mobile_navigation"
-  app:startDestination="@id/navigation_feed">
+  app:startDestination="@id/navigation_friends">
 
   <fragment
-    android:id="@+id/navigation_feed"
-    android:label="@string/clip_feed"
-    android:name="edu.cnm.deepdive.tunefull.controller.ClipFeedFragment"
-    tools:layout="@layout/fragment_clip_feed">
-    <argument
-      android:name="feed_type"
-      app:argType="edu.cnm.deepdive.tunefull.controller.ClipFeedFragment$FeedType"/>
-    <action
-      android:id="@+id/open_spotify"
-      app:destination="@id/navigation_spotify">
-      <argument
-        android:name="clip"
-        app:argType="string"/>
-    </action>
-
+    android:id="@+id/navigation_friends"
+    android:label="@string/relationship_feed"
+    android:name="edu.cnm.deepdive.tunefull.controller.RelationshipFragment"
+    tools:layout="@layout/fragment_relationship">
   </fragment>
-
-  <fragment
-    android:id="@+id/navigation_profile"
-    android:label="@string/profile"
-    android:name="edu.cnm.deepdive.tunefull.controller.ProfileFragment"
-    tools:layout="@layout/fragment_profile">
-    <action
-      android:id="@id/open_spotify"
-      app:destination="@id/navigation_spotify"/>
-  </fragment>
-
-  <fragment
-    android:id="@+id/navigation_spotify"
-    android:label="@string/playing_music"
-    android:name="edu.cnm.deepdive.tunefull.controller.SpotifyFragment"
-    tools:layout="@layout/fragment_spotify"/>
 
 </navigation>

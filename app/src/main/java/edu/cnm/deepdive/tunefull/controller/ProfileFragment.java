@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.tunefull.controller;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.preference.PreferenceManager;
 import edu.cnm.deepdive.tunefull.R;
+import edu.cnm.deepdive.tunefull.controller.RelationshipFragment.RelationshipType;
 import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
+import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 
 public class ProfileFragment extends Fragment {
 
+  private static final String RELATIONSHIP_PREF_KEY = "relationship_index";
   private static final String ARG_SECTION_NUMBER = "section_number";
+
+  private SharedPreferences preferences;
   private ClipViewModel clipViewModel;
+  private RelationshipViewModel relationshipViewModel;
   private FragmentProfileBinding binding;
   private NavController navController;
 
@@ -30,6 +37,7 @@ public class ProfileFragment extends Fragment {
     return fragment;
   }
 
+  //TODO fix viewmodel placement/indexing
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -47,15 +55,24 @@ public class ProfileFragment extends Fragment {
 //    navController = NavHostFragment.findNavController(this);
     binding = FragmentProfileBinding.inflate(inflater);
     binding.sectionLabel.setText(R.string.profile);
-    binding.myClips.setOnClickListener((v) -> {
-//      navController.navigate(ProfileFragmentDirections.openSpotify());
-    });
     binding.setGenre.setOnClickListener((v) -> {
           ChangeGenreDialog dialog = new ChangeGenreDialog();
           dialog.show(getChildFragmentManager(), dialog.getClass().getSimpleName());
         }
     );
+    preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
     binding.friendRequests.setOnClickListener((v) -> {
+      preferences.edit().putInt(RELATIONSHIP_PREF_KEY, RelationshipType.PENDING.ordinal()).apply();
+      Intent intent = new Intent(getContext(), RelationshipsActivity.class);
+      startActivity(intent);
+    });
+    binding.myFriends.setOnClickListener((v) -> {
+      preferences.edit().putInt(RELATIONSHIP_PREF_KEY, RelationshipType.FRIENDS.ordinal()).apply();
+      Intent intent = new Intent(getContext(), RelationshipsActivity.class);
+      startActivity(intent);
+    });
+    binding.myFollows.setOnClickListener((v) -> {
+      preferences.edit().putInt(RELATIONSHIP_PREF_KEY, RelationshipType.FOLLOWING.ordinal()).apply();
       Intent intent = new Intent(getContext(), RelationshipsActivity.class);
       startActivity(intent);
     });
