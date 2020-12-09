@@ -1,18 +1,19 @@
 package edu.cnm.deepdive.tunefull.viewmodel;
 
+import android.app.Application;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import com.spotify.protocol.types.Track;
+import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import edu.cnm.deepdive.tunefull.model.Clip;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import edu.cnm.deepdive.tunefull.service.TunefullWebService;
-import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 
-public class ClipViewModel extends ViewModel {
+public class ClipViewModel extends AndroidViewModel {
 
   private final MutableLiveData<Clip> clip;
   private final MutableLiveData<List<Clip>> clips;
@@ -24,7 +25,8 @@ public class ClipViewModel extends ViewModel {
 
   private FeedType feedType = FeedType.ME;
 
-  public ClipViewModel() {
+  public ClipViewModel(Application application) {
+    super(application);
     clip = new MutableLiveData<>();
     clips = new MutableLiveData<>();
     index = new MutableLiveData<>();
@@ -36,38 +38,58 @@ public class ClipViewModel extends ViewModel {
 
   public void setIndex(int index) {
     this.index.setValue(index);
-    feedType = (index == 0)? FeedType.DISCOVERY : FeedType.FRIENDS_FOLLOWS;
+    feedType = (index == 0) ? FeedType.DISCOVERY : FeedType.FRIENDS_FOLLOWS;
   }
 
   public FeedType getFeedType() {
     return feedType;
   }
 
-  // TODO fix this method to get clips from the webservice
   public LiveData<List<Clip>> getClips() {
     Source source;
     if (feedType == FeedType.DISCOVERY) {
       source = Source.ALL;
-    } else if (feedType == FeedType.FRIENDS_FOLLOWS){
+    } else if (feedType == FeedType.FRIENDS_FOLLOWS) {
       source = Source.RELATIONSHIPS;
     } else {
       source = Source.ME;
     }
     pending.add(
         signInService.refresh()
-        .observeOn(Schedulers.io())
-        .flatMap((token) -> webService.getClips(token, source))
-        .subscribe(
-            clips::postValue,
-            throwable::postValue
-        )
+            .observeOn(Schedulers.io())
+            .flatMap((token) -> webService.getClips(token, source))
+            .subscribe(
+                clips::postValue,
+                throwable::postValue
+            )
     );
     return clips;
   }
 
   public LiveData<Clip> postClip(Track track, long beginTimestamp, long endTimestamp) {
-    //TODO fix this method
-    return clip;
+    Clip clip = new Clip();
+    clip.setSongTitle(track.name);
+    if (track.artist != null) {
+      clip.setArtist(track.artist.name);
+    } else {
+      clip.setArtist(track.artists.get(0).name);
+    }
+    if (track.album != null) {
+      clip.setAlbum(track.album.name);
+    }
+    clip.setTrackKey(track.uri);
+    clip.setBeginTimestamp(beginTimestamp);
+    clip.setEndTimestamp(endTimestamp);
+    pending.add(
+        signInService.refresh()
+            .observeOn(Schedulers.io())
+            .flatMap((token) -> webService.postClip(token, clip))
+            .subscribe(
+                this.clip::postValue,
+                throwable::postValue
+            )
+    );
+    return this.clip;
   }
 
   /**

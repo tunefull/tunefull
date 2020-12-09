@@ -26,7 +26,7 @@ public class LikedSongsFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     binding = FragmentLikedSongsBinding.inflate(inflater);
-    navController = NavHostFragment.findNavController(this);
+//    navController = NavHostFragment.findNavController(this);
     trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
     return binding.getRoot();
   }

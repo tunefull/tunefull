@@ -21,7 +21,7 @@
   <string name="post_clip">Post clip</string>
   <string name="post_clip_message">Post your 30-second clip by selecting the beginning timestamp:</string>
   <string name="select">Select</string>
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="pick_a_genre">Pick a genre:</string>
+  <string name="post">Post</string>
+  <string name="install_spotify">Please install the Spotify app first.</string>
 </resources>

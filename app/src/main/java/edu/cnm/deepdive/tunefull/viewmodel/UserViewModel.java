@@ -1,15 +1,16 @@
 package edu.cnm.deepdive.tunefull.viewmodel;
 
+import android.app.Application;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import edu.cnm.deepdive.tunefull.model.User.Genre;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import edu.cnm.deepdive.tunefull.service.TunefullWebService;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class UserViewModel extends ViewModel {
+public class UserViewModel extends AndroidViewModel {
 
   private final TunefullWebService webService;
   private final SpotifySignInService signInService;
@@ -17,7 +18,8 @@ public class UserViewModel extends ViewModel {
   private final MutableLiveData<Genre> genre;
   private final MutableLiveData<Throwable> throwable;
 
-  public UserViewModel() {
+  public UserViewModel(Application application) {
+    super(application);
     webService = TunefullWebService.getInstance();
     signInService = SpotifySignInService.getInstance();
     pending = new CompositeDisposable();
@@ -29,13 +31,13 @@ public class UserViewModel extends ViewModel {
     return genre;
   }
 
-  public LiveData<Genre> saveGenre(Genre g) {
+  public LiveData<Genre> saveGenre(Genre genre) {
     pending.add(
         signInService.refresh()
             .observeOn(Schedulers.io())
-            .flatMap((token) -> webService.setGenre(token, g))
+            .flatMap((token) -> webService.setGenre(token, genre))
             .subscribe(
-                genre::postValue,
+                this.genre::postValue,
                 throwable::postValue
             )
     );

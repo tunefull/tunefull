@@ -17,7 +17,6 @@ public class TrackViewModel extends AndroidViewModel {
   private final CompositeDisposable pending;
   private final SpotifyRepository spotifyRepository;
 
-  //TODO make all viewmodels extend androidviewmodel
   public TrackViewModel(Application application) {
     super(application);
     track = new MutableLiveData<>();

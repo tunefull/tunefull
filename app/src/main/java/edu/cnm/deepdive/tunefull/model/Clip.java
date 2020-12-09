@@ -19,11 +19,12 @@ public class Clip {
   @Expose
   private String trackKey;
 
+  // TODO change service/erd/etc to be longs
   @Expose
-  private int beginTimestamp;
+  private long beginTimestamp;
 
   @Expose
-  private int endTimestamp;
+  private long endTimestamp;
 
   @Expose
   private Date dateTimePosted;
@@ -71,19 +72,19 @@ public class Clip {
     this.trackKey = trackKey;
   }
 
-  public int getBeginTimestamp() {
+  public long getBeginTimestamp() {
     return beginTimestamp;
   }
 
-  public void setBeginTimestamp(int beginTimestamp) {
+  public void setBeginTimestamp(long beginTimestamp) {
     this.beginTimestamp = beginTimestamp;
   }
 
-  public int getEndTimestamp() {
+  public long getEndTimestamp() {
     return endTimestamp;
   }
 
-  public void setEndTimestamp(int endTimestamp) {
+  public void setEndTimestamp(long endTimestamp) {
     this.endTimestamp = endTimestamp;
   }
 

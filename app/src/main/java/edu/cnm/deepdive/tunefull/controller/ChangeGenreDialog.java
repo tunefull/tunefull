@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.DialogChangeGenreBinding;
 import edu.cnm.deepdive.tunefull.model.User.Genre;
@@ -29,7 +30,7 @@ public class ChangeGenreDialog extends DialogFragment implements OnItemSelectedL
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-    viewModel = new UserViewModel();
+    viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
     binding = DialogChangeGenreBinding.inflate(LayoutInflater.from(getContext()));
     spinner = binding.genreSpinner;
     ArrayAdapter<Genre> adapter = new ArrayAdapter<>(

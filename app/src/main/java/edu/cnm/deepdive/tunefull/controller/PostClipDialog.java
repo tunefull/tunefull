@@ -17,9 +17,16 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.DialogPostClipBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
-import org.jetbrains.annotations.NotNull;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class PostClipDialog extends DialogFragment {
+
+  private static final int MILLIS_PER_SEC = 1_000;
+  private static final int MAX_CLIP_SEC = 30;
+  private static final String TIME_ZONE = "UTC";
 
   private AlertDialog dialog;
   private Track track;
@@ -34,11 +41,15 @@ public class PostClipDialog extends DialogFragment {
     binding = DialogPostClipBinding.inflate(LayoutInflater.from(getContext()));
     Slider slider = binding.beginTimestampSlider;
     //noinspection IntegerDivisionInFloatingPointContext
-    slider.setValueTo((track.duration / 1_000) - 30);
+    slider.setValueTo((track.duration / MILLIS_PER_SEC) - MAX_CLIP_SEC);
+    slider.setLabelFormatter(value -> {
+      SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
+      dateFormat.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
+      return dateFormat.format(new Date((long) value * MILLIS_PER_SEC));
+    });
     dialog = new Builder(getActivity())
-        // TODO set formatter (to display the time values in a logical way)
         .setView(R.layout.dialog_post_clip)
-        .setPositiveButton("Post", (dialog, which) -> {
+        .setPositiveButton(R.string.post, (dialog, which) -> {
           long beginTimestamp = (long) slider.getValue() * 1_000;
           viewModel.postClip(track, beginTimestamp, beginTimestamp + 30_000);
         })

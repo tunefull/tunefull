@@ -10,7 +10,6 @@ public class UserRepository {
   private final Context context;
   private final TunefullWebService webService;
   private final SpotifySignInService signInService;
-  // TODO Add fields as appropriate for access to DAOs, etc.
 
   public UserRepository(Context context) {
     this.context = context;
@@ -22,7 +21,6 @@ public class UserRepository {
     return signInService.refresh()
         .observeOn(Schedulers.io())
         .flatMap(webService::getProfile);
-    // TODO Add additional logic for persistence as appropriate
   }
 
 }

@@ -16,7 +16,7 @@ import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentSpotifyBinding;
 
-// TODO make this into a dialog instead??
+// TODO move much of this functionality into a viewmodel, and access from other classes
 public class SpotifyFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
@@ -67,8 +67,6 @@ public class SpotifyFragment extends Fragment {
       @Override
       public void onConnected(SpotifyAppRemote spotifyAppRemote) {
         SpotifyFragment.this.spotifyAppRemote = spotifyAppRemote;
-        Log.d(getClass().getSimpleName(), getString(R.string.connected));
-
         connected();
       }
 
@@ -85,7 +83,7 @@ public class SpotifyFragment extends Fragment {
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
 
-  // TODO this doesn't play the right track for some tracks???? It changes based on the login??
+  // TODO this doesn't play the right track for some tracks???? It changes based on the login?? whyyyy spotify whyyyy?
   private void connected() {
     spotifyAppRemote.getPlayerApi().play(String.format(TRACK_FORMAT, trackId));
     spotifyAppRemote.getPlayerApi().seekTo(beginTimestamp);
@@ -97,7 +95,7 @@ public class SpotifyFragment extends Fragment {
             Log.d("SpotifyActivity", track.name + " by " + track.artist.name);
           }
         });
-    //TODO wait for endTimestamp - beginTimestamp - but there has to be a better way to do this rather than freezing up the screen
+    //TODO do this on a background thread, so waiting for (endTimestamp-beginTimestamp) doesn't freeze up the app
 //    try {
 //      TimeUnit.MILLISECONDS.sleep(endTimestamp - beginTimestamp);
 //    } catch (InterruptedException e) {

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             (user) -> Toast.makeText(this, user.getUsername(), Toast.LENGTH_LONG).show(),
             (throwable) -> Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show()
         );
+    // FIXME (again, temporary to verify roundtrip with spotify)
     TrackViewModel viewModel = new ViewModelProvider(this).get(TrackViewModel.class);
     viewModel.getTracks().observe(this, (tracks) -> {
       Log.d(getClass().getSimpleName(), tracks.toString());
