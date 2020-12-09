@@ -9,13 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.preference.PreferenceManager;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
-import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
@@ -24,7 +21,6 @@ public class ClipFeedFragment extends Fragment {
 
   private static final String MAIN_SCREENS_PREF_KEY = "main_index";
   private static final String ARG_SECTION_NUMBER = "section_number";
-  private NavController navController;
   private ClipViewModel clipViewModel;
   private SpotifyViewModel spotifyViewModel;
   private RelationshipViewModel relationshipViewModel;
@@ -56,7 +52,6 @@ public class ClipFeedFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentClipFeedBinding.inflate(inflater);
-//    navController = Navigation.findNavController(binding.getRoot());
     int sectionText;
     switch (index) {
       case 1:

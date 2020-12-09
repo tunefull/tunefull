@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
   private UserRepository userRepository; // FIXME
   private TabLayout tabs;
-  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_earth, R.drawable.ic_tunefull_logo_text, R.drawable.ic_clips_24, R.drawable.ic_clips_24, R.drawable.ic_person_24};
+  private static final int[] TAB_ICONS = new int[]{R.drawable.ic_earth, R.drawable.ic_tunefull_logo_text, R.drawable.ic_clips_24, R.drawable.ic_heart, R.drawable.ic_person_24};
   private static final int[] TAB_NAMES = new int[]{R.string.discovery, R.string.feed, R.string.my_clips, R.string.my_liked_songs, R.string.profile};
 
   @Override

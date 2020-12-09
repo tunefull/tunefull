@@ -16,10 +16,13 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface TunefullWebService {
 
@@ -31,13 +34,13 @@ public interface TunefullWebService {
   Single<User> getProfile(@Header("Authorization") String bearerToken);
 
   @PUT("users/me/genre")
-  Single<Genre> setGenre(@Header("Authorization") String bearerToken, Genre genre);
+  Single<Genre> setGenre(@Header("Authorization") String bearerToken, @Query("genre") Genre genre);
 
   @GET("clips")
-  Single<List<Clip>> getClips(@Header("Authorization") String bearerToken, Source source);
+  Single<List<Clip>> getClips(@Header("Authorization") String bearerToken, @Query("source") Source source);
 
   @POST("clips")
-  Single<Clip> postClip(@Header("Authorization") String bearerToken, Clip clip);
+  Single<Clip> postClip(@Header("Authorization") String bearerToken, @Body Clip clip);
 
   @GET("friendships")
   Single<List<Relationship>> getFriendships(@Header("Authorization") String bearerToken);
@@ -49,10 +52,10 @@ public interface TunefullWebService {
   Single<List<Relationship>> getPending(@Header("Authorization") String bearerToken);
 
   @POST("friendships")
-  Single<Relationship> postRelationship(@Header("Authorization") String bearerToken, User user);
+  Single<Relationship> postRelationship(@Header("Authorization") String bearerToken, @Body User user);
 
   @PUT("friendships/{relationshipId}")
-  Single<Relationship> updateRelationship(@Header("Authorization") String bearerToken, long relationshipId, boolean accepted);
+  Single<Relationship> updateRelationship(@Header("Authorization") String bearerToken, @Path("relationshipId") long relationshipId, @Body boolean accepted);
 
   class InstanceHolder {
 
