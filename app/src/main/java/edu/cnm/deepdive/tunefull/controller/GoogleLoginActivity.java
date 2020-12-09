@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import edu.cnm.deepdive.tunefull.R;
+import edu.cnm.deepdive.tunefull.databinding.ActivityGoogleLoginBinding;
 import edu.cnm.deepdive.tunefull.databinding.ActivityLoginBinding;
 import edu.cnm.deepdive.tunefull.service.GoogleSignInService;
 import edu.cnm.deepdive.tunefull.service.UserRepository;
@@ -21,7 +22,7 @@ public class GoogleLoginActivity extends AppCompatActivity {
   private static final int LOGIN_REQUEST_CODE = 1000;
 
   private GoogleSignInService service;
-  private ActivityLoginBinding binding;
+  private ActivityGoogleLoginBinding binding;
   private UserRepository userRepository;
 
   @SuppressLint("CheckResult")
@@ -35,8 +36,8 @@ public class GoogleLoginActivity extends AppCompatActivity {
         .subscribe(
             this::updateAndSwitch,
             (throwable) -> {
-              binding = ActivityLoginBinding.inflate(getLayoutInflater());
-              binding.signIn.setOnClickListener((v) -> service.startSignIn(this, LOGIN_REQUEST_CODE));
+              binding = ActivityGoogleLoginBinding.inflate(getLayoutInflater());
+              binding.googleSignIn.setOnClickListener((v) -> service.startSignIn(this, LOGIN_REQUEST_CODE));
               setContentView(binding.getRoot());
             }
         );
