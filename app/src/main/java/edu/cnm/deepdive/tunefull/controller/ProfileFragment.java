@@ -28,6 +28,7 @@ public class ProfileFragment extends Fragment {
   private RelationshipViewModel relationshipViewModel;
   private FragmentProfileBinding binding;
   private NavController navController;
+  private int index;
 
   public static ProfileFragment newInstance(int index) {
     ProfileFragment fragment = new ProfileFragment();
@@ -37,22 +38,18 @@ public class ProfileFragment extends Fragment {
     return fragment;
   }
 
-  //TODO fix viewmodel placement/indexing
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    clipViewModel = new ViewModelProvider(this).get(ClipViewModel.class);
-    int index = 1;
-    if (getArguments() != null) {
-      index = getArguments().getInt(ARG_SECTION_NUMBER);
-    }
-    clipViewModel.setIndex(index);
+    index = (getArguments() != null)? getArguments().getInt(ARG_SECTION_NUMBER) : 0;
   }
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
 //    navController = NavHostFragment.findNavController(this);
+    clipViewModel = new ViewModelProvider(this).get(ClipViewModel.class);
+    clipViewModel.setIndex(index);
     binding = FragmentProfileBinding.inflate(inflater);
     binding.sectionLabel.setText(R.string.profile);
     binding.setGenre.setOnClickListener((v) -> {
@@ -79,8 +76,4 @@ public class ProfileFragment extends Fragment {
     return binding.getRoot();
   }
 
-  @Override
-  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-  }
 }

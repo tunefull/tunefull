@@ -16,7 +16,7 @@ import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.FragmentSpotifyBinding;
 
-// TODO move much of this functionality into a viewmodel, and access from other classes
+// TODO take this out, most of it is in other classes
 public class SpotifyFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
@@ -27,7 +27,6 @@ public class SpotifyFragment extends Fragment {
   private SpotifyAppRemote spotifyAppRemote;
   private FragmentSpotifyBinding binding;
 
-  //TODO get these things from the clip
   private String trackId = "622SzYSd4p6ZahVRqS3DSv";
   private long beginTimestamp = 159000;
   private long endTimestamp = 189000;
@@ -55,7 +54,6 @@ public class SpotifyFragment extends Fragment {
     return binding.getRoot();
   }
 
-  //TODO this starts playing the music as soon as the app loads, why?
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -83,7 +81,6 @@ public class SpotifyFragment extends Fragment {
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
 
-  // TODO this doesn't play the right track for some tracks???? It changes based on the login?? whyyyy spotify whyyyy?
   private void connected() {
     spotifyAppRemote.getPlayerApi().play(String.format(TRACK_FORMAT, trackId));
     spotifyAppRemote.getPlayerApi().seekTo(beginTimestamp);
@@ -95,12 +92,6 @@ public class SpotifyFragment extends Fragment {
             Log.d("SpotifyActivity", track.name + " by " + track.artist.name);
           }
         });
-    //TODO do this on a background thread, so waiting for (endTimestamp-beginTimestamp) doesn't freeze up the app
-//    try {
-//      TimeUnit.MILLISECONDS.sleep(endTimestamp - beginTimestamp);
-//    } catch (InterruptedException e) {
-//      e.printStackTrace();
-//    }
     spotifyAppRemote.getPlayerApi().pause();
   }
 }

@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 binding.signIn.setText(R.string.install_spotify);
                 binding.signIn.setOnClickListener((v) -> {
                   Toast.makeText(this, "Install and sign in to Spotify before proceeding", Toast.LENGTH_LONG).show();
-                // TODO Open google play's spotify page instead of the toast
+                // TODO Open google play's spotify page instead of this toast
                 });
               } else {
                 binding.signIn.setOnClickListener((v) ->

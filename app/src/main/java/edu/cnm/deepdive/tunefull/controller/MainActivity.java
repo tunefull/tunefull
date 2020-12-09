@@ -1,17 +1,14 @@
 package edu.cnm.deepdive.tunefull.controller;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import edu.cnm.deepdive.tunefull.R;
-import edu.cnm.deepdive.tunefull.service.UserRepository;
 import edu.cnm.deepdive.tunefull.adapter.SectionsPagerAdapter;
-import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
+import edu.cnm.deepdive.tunefull.service.UserRepository;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
             (user) -> Toast.makeText(this, user.getUsername(), Toast.LENGTH_LONG).show(),
             (throwable) -> Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show()
         );
-    // FIXME (again, temporary to verify roundtrip with spotify)
-    TrackViewModel viewModel = new ViewModelProvider(this).get(TrackViewModel.class);
-    viewModel.getTracks().observe(this, (tracks) -> {
-      Log.d(getClass().getSimpleName(), tracks.toString());
-    });
   }
 
   private void setUpTabs() {

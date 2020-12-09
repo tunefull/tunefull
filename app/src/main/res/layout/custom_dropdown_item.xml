@@ -4,6 +4,7 @@
   android:id="@android:id/text1"
   android:background="@color/colorPrimaryCards"
   android:textColor="@color/textColor"
+  android:textSize="@dimen/small_text_size"
   android:padding="@dimen/small_padding"
   android:singleLine="true"
   android:layout_width="match_parent"

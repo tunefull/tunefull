@@ -65,7 +65,7 @@ public class SpotifyViewModel extends AndroidViewModel {
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
 
-  // TODO spotify plays, but doesn't play the right tracks ugh
+  // TODO spotify plays, but doesn't always play the right tracks ugh
   private void playClip(Clip clip) {
     spotifyAppRemote.getPlayerApi().play(clip.getTrackKey());
     long beginTimestamp = clip.getBeginTimestamp();

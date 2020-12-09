@@ -45,6 +45,7 @@ public class ClipViewModel extends AndroidViewModel {
     return feedType;
   }
 
+  // TODO put this in repositories
   public LiveData<List<Clip>> getClips() {
     Source source;
     if (feedType == FeedType.DISCOVERY) {

@@ -7,19 +7,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.tunefull.controller.RelationshipFragment.RelationshipType;
 import edu.cnm.deepdive.tunefull.model.Relationship;
-import edu.cnm.deepdive.tunefull.model.User.Genre;
 import edu.cnm.deepdive.tunefull.service.RelationshipRepository;
-import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
-import edu.cnm.deepdive.tunefull.service.TunefullWebService;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 
 public class RelationshipViewModel extends AndroidViewModel {
 
   private final CompositeDisposable pending;
-  private final SpotifySignInService signInService;
-  private final TunefullWebService webService;
   private final RelationshipRepository relationshipRepository;
   private final MutableLiveData<Throwable> throwable;
   private final MutableLiveData<List<Relationship>> friendships;
@@ -30,8 +24,6 @@ public class RelationshipViewModel extends AndroidViewModel {
   public RelationshipViewModel(@NonNull Application application) {
     super(application);
     pending = new CompositeDisposable();
-    signInService = SpotifySignInService.getInstance();
-    webService = TunefullWebService.getInstance();
     relationshipRepository = new RelationshipRepository(application);
     throwable = new MutableLiveData<>();
     friendships = new MutableLiveData<>();
