@@ -12,8 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
 import edu.cnm.deepdive.tunefull.adapter.LikedSongsRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentLikedSongsBinding;
+import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
 
 public class LikedSongsFragment extends Fragment {
@@ -21,6 +23,7 @@ public class LikedSongsFragment extends Fragment {
   private NavController navController;
   private FragmentLikedSongsBinding binding;
   private TrackViewModel trackViewModel;
+  private SpotifyViewModel spotifyViewModel;
 
   @Nullable
   @Override
@@ -36,10 +39,12 @@ public class LikedSongsFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
     trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
+    spotifyViewModel = new ViewModelProvider(getActivity()).get(SpotifyViewModel.class);
     trackViewModel.getTracks().observe(lifecycleOwner, (tracks) -> {
       LikedSongsRecyclerAdapter adapter = new LikedSongsRecyclerAdapter(getContext(), tracks,
           (track) -> {
-            //play the track
+            trackViewModel.setTrack(track);
+            spotifyViewModel.play(track);
           },
           (track) -> {
             trackViewModel.setTrack(track);
@@ -50,4 +55,9 @@ public class LikedSongsFragment extends Fragment {
     });
   }
 
+  @Override
+  public void onStop() {
+    super.onStop();
+    spotifyViewModel.disconnect();
+  }
 }

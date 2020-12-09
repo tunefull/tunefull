@@ -11,11 +11,13 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.preference.PreferenceManager;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.ClipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentClipFeedBinding;
 import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
+import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
 
 public class ClipFeedFragment extends Fragment {
 
@@ -26,6 +28,7 @@ public class ClipFeedFragment extends Fragment {
   private FragmentClipFeedBinding binding;
   private int index;
   private SharedPreferences preferences;
+  private SpotifyViewModel spotifyViewModel;
 
   public static ClipFeedFragment newInstance(int index) {
     ClipFeedFragment fragment = new ClipFeedFragment();
@@ -75,6 +78,7 @@ public class ClipFeedFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
     clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
+    spotifyViewModel = new ViewModelProvider(getActivity()).get(SpotifyViewModel.class);
     clipViewModel.setIndex(index);
     clipViewModel.getClips().observe(lifecycleOwner, (clips) -> {
           ClipRecyclerAdapter adapter = new ClipRecyclerAdapter(getContext(),
@@ -91,6 +95,12 @@ public class ClipFeedFragment extends Fragment {
           binding.clipRecycler.setAdapter(adapter);
         }
     );
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    spotifyViewModel.disconnect();
   }
 
   public enum FeedType {

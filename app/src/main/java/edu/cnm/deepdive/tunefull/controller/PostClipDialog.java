@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -17,20 +18,16 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.DialogPostClipBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class PostClipDialog extends DialogFragment {
 
-  private static final int MILLIS_PER_SEC = 1_000;
+  private static final float MILLIS_PER_SEC = 1_000;
   private static final int MAX_CLIP_SEC = 30;
   private static final String TIME_ZONE = "UTC";
 
   private AlertDialog dialog;
   private Track track;
-  private ClipViewModel viewModel;
+  private ClipViewModel clipViewModel;
   private TrackViewModel trackViewModel;
   private DialogPostClipBinding binding;
 
@@ -38,24 +35,27 @@ public class PostClipDialog extends DialogFragment {
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
+    clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
     trackViewModel.getTrack().observe(getActivity(), (track) -> {
           this.track = track;
         }
     );
     binding = DialogPostClipBinding.inflate(LayoutInflater.from(getContext()));
     Slider slider = binding.beginTimestampSlider;
-    //noinspection IntegerDivisionInFloatingPointContext
-    slider.setValueTo((track.duration / MILLIS_PER_SEC) - MAX_CLIP_SEC);
-    slider.setLabelFormatter(value -> {
-      SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
-      dateFormat.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
-      return dateFormat.format(new Date((long) value * MILLIS_PER_SEC));
-    });
+    //TODO setValueTo works in the file but not programmatically, why?
+//    slider.setValueTo((track.duration / MILLIS_PER_SEC) - MAX_CLIP_SEC);
+    // TODO set a formatter to display the time in terms of minutes/seconds instead of just seconds
+//    slider.setLabelFormatter((value) -> {
+//      SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
+//      dateFormat.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
+//      return dateFormat.format(new Date((long) value * MILLIS_PER_SEC));
+//    });
     dialog = new Builder(getActivity())
         .setView(R.layout.dialog_post_clip)
         .setPositiveButton(R.string.post, (dialog, which) -> {
           long beginTimestamp = (long) slider.getValue() * 1_000;
-          viewModel.postClip(track, beginTimestamp, beginTimestamp + 30_000);
+          clipViewModel.postClip(track, beginTimestamp, beginTimestamp + 30_000);
+          Toast.makeText(getContext(), getString(R.string.clip_posted), Toast.LENGTH_LONG).show();
         })
         .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
         })
