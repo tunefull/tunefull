@@ -40,6 +40,7 @@ public class TrackViewModel extends AndroidViewModel {
   }
 
   public void loadTracks() {
+    throwable.setValue(null);
     pending.add(
         spotifyRepository.getAll()
         .subscribe(

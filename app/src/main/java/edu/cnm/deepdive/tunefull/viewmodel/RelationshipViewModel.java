@@ -7,7 +7,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.tunefull.controller.RelationshipFragment.RelationshipType;
 import edu.cnm.deepdive.tunefull.model.Relationship;
+import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.service.RelationshipRepository;
+import edu.cnm.deepdive.tunefull.service.UserRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
@@ -79,8 +81,11 @@ public class RelationshipViewModel extends AndroidViewModel {
     );
   }
 
-  public void saveRelationship(Relationship relationship) {
+  public void saveRelationship(User user) {
     throwable.setValue(null);
+    Relationship relationship = new Relationship();
+    relationship.setFriendRelationship(true);
+    relationship.setRequested(user);
     this.relationship.setValue(relationship);
     pending.add(
         relationshipRepository.saveRelationship(relationship)
@@ -90,4 +95,16 @@ public class RelationshipViewModel extends AndroidViewModel {
             )
     );
   }
+
+  public void updateRelationship(Relationship relationship, boolean friendAccepted) {
+    throwable.setValue(null);
+    pending.add(
+        relationshipRepository.updateRelationship(relationship, friendAccepted)
+            .subscribe(
+                this.relationship::postValue,
+                throwable:: postValue
+            )
+    );
+  }
+
 }

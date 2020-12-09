@@ -12,14 +12,17 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.RelationshipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentRelationshipBinding;
+import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
+import edu.cnm.deepdive.tunefull.viewmodel.UserViewModel;
 
 public class RelationshipFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
 
   private FragmentRelationshipBinding binding;
-  private RelationshipViewModel viewModel;
+  private RelationshipViewModel relationshipViewModel;
+  private UserViewModel userViewModel;
   private RelationshipType relationshipType;
 
   public static RelationshipFragment newInstance(RelationshipType type) {
@@ -62,12 +65,19 @@ public class RelationshipFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
-    viewModel = new ViewModelProvider(getActivity()).get(RelationshipViewModel.class);
-    viewModel.getRelationships(relationshipType).observe(lifecycleOwner, (relationships) -> {
+    relationshipViewModel = new ViewModelProvider(getActivity()).get(RelationshipViewModel.class);
+    userViewModel= new ViewModelProvider(getActivity()).get(UserViewModel.class);
+    // TODO there has to be a better way to get this info inside the lamda on line 75
+    final User[] currentUser = new User[1];
+    userViewModel.getUser().observe(lifecycleOwner, user -> {
+      currentUser[0] = user;
+    });
+    relationshipViewModel.getRelationships(relationshipType).observe(lifecycleOwner, (relationships) -> {
       RelationshipRecyclerAdapter adapter = new RelationshipRecyclerAdapter(getContext(),
           relationships,
-          (relationship) -> viewModel.saveRelationship(relationship),
-          relationshipType);
+          (relationship) -> relationshipViewModel.updateRelationship(relationship, true),
+          relationshipType,
+          currentUser[0]);
       binding.userRecycler.setAdapter(adapter);
     });
   }

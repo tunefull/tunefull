@@ -20,7 +20,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @StringRes
   private static final int[] TAB_TITLES = new int[]{R.string.discovery, R.string.feed,
-      R.string.my_clips, R.string.profile};
+      R.string.my_clips, R.string.my_liked_songs, R.string.profile};
   private final Context context;
 
   public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -30,11 +30,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-    if (position == 2) {
-      return new LikedSongsFragment();
-    }
     if (position < 3) {
       return ClipFeedFragment.newInstance(position);
+    } else if (position == 3) {
+      return new LikedSongsFragment();
     } else {
       return ProfileFragment.newInstance(position);
     }
@@ -48,6 +47,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public int getCount() {
-    return 4;
+    return 5;
   }
 }

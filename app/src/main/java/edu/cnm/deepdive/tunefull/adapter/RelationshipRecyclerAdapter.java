@@ -2,6 +2,7 @@ package edu.cnm.deepdive.tunefull.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -22,13 +23,15 @@ public class RelationshipRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   private final List<Relationship> relationships;
   private final LayoutInflater inflater;
   private final RelationshipType relationshipType;
+  private final User currentUser;
 
   public RelationshipRecyclerAdapter(Context context, List<Relationship> relationships,
-      OnAddFriendButtonClickListener listener, RelationshipType relationshipType) {
+      OnAddFriendButtonClickListener listener, RelationshipType relationshipType, User currentUser) {
     this.listener = listener;
     this.context = context;
     this.relationships = relationships;
     this.relationshipType = relationshipType;
+    this.currentUser = currentUser;
     inflater = LayoutInflater.from(context);
   }
 
@@ -60,19 +63,22 @@ public class RelationshipRecyclerAdapter extends RecyclerView.Adapter<Holder> {
       this.binding = binding;
     }
 
-    // TODO find a way to get the user's profile information so we know which name to not show
-    // also so that the proper button icons can be shown
     private void bind(int position) {
       Relationship relationship = relationships.get(position);
       User requester = relationship.getRequester();
       User requested = relationship.getRequested();
-      binding.requesterName.setText(requester.toString());
-      binding.requestedName.setText(requested.toString());
-      binding.requesterGenre.setText(requester.getGenre().toString());
-      binding.requestedGenre.setText(requested.getGenre().toString());
+      if (currentUser.equals(requester)) {
+        binding.userName.setText(requested.getUsername());
+        binding.userGenre.setText(requested.getGenre().toString());
+      } else {
+        binding.userName.setText(requester.getUsername());
+        binding.userName.setText(requester.getGenre().toString());
+      }
       if (relationship.isFriendRelationship()) {
         binding.addFriendButton.setIcon(ContextCompat.getDrawable(context, R.drawable.ic_add_friend_24));
         binding.addFriendButton.setClickable(false);
+      } else if (currentUser.equals(requester) || !relationship.getFriendAccepted()) {
+        binding.addFriendButton.setVisibility(View.GONE);
       }
     }
 

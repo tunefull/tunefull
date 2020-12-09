@@ -9,10 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
 import edu.cnm.deepdive.tunefull.adapter.LikedSongsRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentLikedSongsBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
@@ -20,7 +16,6 @@ import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
 
 public class LikedSongsFragment extends Fragment {
 
-  private NavController navController;
   private FragmentLikedSongsBinding binding;
   private TrackViewModel trackViewModel;
   private SpotifyViewModel spotifyViewModel;
@@ -30,7 +25,6 @@ public class LikedSongsFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     binding = FragmentLikedSongsBinding.inflate(inflater);
-//    navController = NavHostFragment.findNavController(this);
     return binding.getRoot();
   }
 

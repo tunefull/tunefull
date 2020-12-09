@@ -1,34 +1,33 @@
 package edu.cnm.deepdive.tunefull.service;
 
 import android.content.Context;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import edu.cnm.deepdive.tunefull.model.User;
-import edu.cnm.deepdive.tunefull.model.User.Genre;
+import edu.cnm.deepdive.tunefull.model.Clip;
+import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel.Source;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 
-public class UserRepository {
+public class ClipRepository {
 
   private final Context context;
   private final TunefullWebService webService;
   private final GoogleSignInService signInService;
 
-  public UserRepository(Context context) {
+  public ClipRepository(Context context) {
     this.context = context;
     webService = TunefullWebService.getInstance();
     signInService = GoogleSignInService.getInstance();
   }
 
-  public Single<User> getProfileFromServer() {
+  public Single<List<Clip>> getClips(Source source) {
     return signInService.refreshBearerToken()
         .observeOn(Schedulers.io())
-        .flatMap(webService::getProfile);
+        .flatMap(bearerToken -> webService.getClips(bearerToken, source));
   }
 
-  public Single<Genre> saveGenre(Genre genre) {
+  public Single<Clip> postClip(Clip clip) {
     return signInService.refreshBearerToken()
         .observeOn(Schedulers.io())
-        .flatMap((token) -> webService.setGenre(token, genre));
+        .flatMap((token) -> webService.postClip(token, clip));
   }
-
 }
