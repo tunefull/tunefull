@@ -38,6 +38,10 @@ public class PostClipDialog extends DialogFragment {
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
+    trackViewModel.getTrack().observe(getActivity(), (track) -> {
+          this.track = track;
+        }
+    );
     binding = DialogPostClipBinding.inflate(LayoutInflater.from(getContext()));
     Slider slider = binding.beginTimestampSlider;
     //noinspection IntegerDivisionInFloatingPointContext
@@ -69,10 +73,6 @@ public class PostClipDialog extends DialogFragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    trackViewModel.getTrack().observe(getViewLifecycleOwner(), (track) -> {
-          this.track = track;
-        }
-    );
   }
 
 }

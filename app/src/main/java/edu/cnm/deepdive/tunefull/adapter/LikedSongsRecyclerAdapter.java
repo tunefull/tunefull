@@ -61,13 +61,18 @@ public class LikedSongsRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     private void bind(int position) {
       Track track = tracks.get(position);
       binding.songTitle.setText(track.name);
-      binding.songArtist.setText(track.artist.name);
+      if (track.artist == null) {
+        binding.songArtist.setText(track.artists.get(0).name);
+      } else {
+        binding.songArtist.setText(track.artist.name);
+      }
       binding.playButton.setOnClickListener((v) -> playButtonListener.onClick(track));
       binding.createClipButton.setOnClickListener((v) -> clipButtonListener.onClick(track));
     }
   }
 
   public interface OnSongPlayButtonClickListener {
+
     void onClick(Track track);
   }
 

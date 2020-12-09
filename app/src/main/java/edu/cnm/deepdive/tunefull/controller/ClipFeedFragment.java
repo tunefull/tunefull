@@ -88,6 +88,7 @@ public class ClipFeedFragment extends Fragment {
               },
               clipViewModel.getFeedType()
           );
+          binding.clipRecycler.setAdapter(adapter);
         }
     );
   }

@@ -25,7 +25,7 @@ public class TrackViewModel extends AndroidViewModel {
     pending = new CompositeDisposable();
     spotifyRepository = new SpotifyRepository(application);
     loadTracks();
-    // TODO take this out
+    // TODO take this out?
   }
 
   public LiveData<List<Track>> getTracks() {

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment;
 import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
+import edu.cnm.deepdive.tunefull.controller.LikedSongsFragment;
 import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 
 /**
@@ -18,7 +19,8 @@ import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @StringRes
-  private static final int[] TAB_TITLES = new int[]{R.string.discovery, R.string.feed, R.string.my_clips, R.string.profile};
+  private static final int[] TAB_TITLES = new int[]{R.string.discovery, R.string.feed,
+      R.string.my_clips, R.string.profile};
   private final Context context;
 
   public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -28,15 +30,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-    if (position == 0) {
-      return ClipFeedFragment.newInstance(position);
-    } else if (position == 1) {
-      return ClipFeedFragment.newInstance(position);
-    } else if (position == 2) {
+    if (position == 2) {
+      return new LikedSongsFragment();
+    }
+    if (position < 3) {
       return ClipFeedFragment.newInstance(position);
     } else {
       return ProfileFragment.newInstance(position);
-//      return new NestedFragment();
     }
   }
 

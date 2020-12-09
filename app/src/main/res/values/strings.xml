@@ -17,7 +17,6 @@
   <string name="my_friends">My friends</string>
   <string name="logout">Logout</string>
   <string name="create_a_new_clip">Create a new clip</string>
-  <string name="liked_songs">Liked songs</string>
   <string name="post_clip">Post clip</string>
   <string name="post_clip_message">Post your 30-second clip by selecting the beginning timestamp:</string>
   <string name="select">Select</string>
@@ -26,4 +25,5 @@
   <string name="install_spotify">Please install the Spotify app first.</string>
   <string name="my_follows">My follows</string>
   <string name="relationship_feed">Relationship feed</string>
+  <string name="liked_songs">My liked songs</string>
 </resources>

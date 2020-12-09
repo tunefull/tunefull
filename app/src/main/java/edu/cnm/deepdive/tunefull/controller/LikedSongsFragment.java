@@ -11,6 +11,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import edu.cnm.deepdive.tunefull.adapter.LikedSongsRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentLikedSongsBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
@@ -27,7 +28,6 @@ public class LikedSongsFragment extends Fragment {
       @Nullable Bundle savedInstanceState) {
     binding = FragmentLikedSongsBinding.inflate(inflater);
 //    navController = NavHostFragment.findNavController(this);
-    trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
     return binding.getRoot();
   }
 
@@ -35,6 +35,7 @@ public class LikedSongsFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
+    trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
     trackViewModel.getTracks().observe(lifecycleOwner, (tracks) -> {
       LikedSongsRecyclerAdapter adapter = new LikedSongsRecyclerAdapter(getContext(), tracks,
           (track) -> {
@@ -45,6 +46,7 @@ public class LikedSongsFragment extends Fragment {
             PostClipDialog dialog = new PostClipDialog();
             dialog.show(getChildFragmentManager(), dialog.getClass().getSimpleName());
           });
+      binding.songRecycler.setAdapter(adapter);
     });
   }
 
