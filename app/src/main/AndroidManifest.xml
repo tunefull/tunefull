@@ -26,13 +26,16 @@
           android:scheme="@string/redirect_uri_scheme"/>
       </intent-filter>
     </activity>
-    <activity android:name=".controller.LoginActivity">
+    <activity android:name=".controller.GoogleLoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <activity android:name=".controller.LoginActivity"/>
+
     <activity
       android:label="@string/app_name"
       android:name=".controller.MainActivity"
