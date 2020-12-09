@@ -3,6 +3,10 @@ package edu.cnm.deepdive.tunefull.model;
 import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 
+/**
+ * Holds data in the database for users. This includes enumerated types from
+ * the {@link Genre} enums.
+ */
 public class User {
 
   @Expose
@@ -16,34 +20,74 @@ public class User {
   @Expose
   private Genre genre;
 
+  /**
+   * Returns the auto-generated id for the clip.
+   *
+   * @return
+   */
   public long getId() {
     return id;
   }
 
+  /**
+   * Sets the auto-generated id for the clip.
+   *
+   * @param id The id to be set.
+   */
   public void setId(long id) {
     this.id = id;
   }
 
+  /**
+   * Returns the username of the user.
+   *
+   * @return
+   */
   public String getUsername() {
     return username;
   }
 
+  /**
+   * Sets the username of the user.
+   *
+   * @param username The username to be set.
+   */
   public void setUsername(String username) {
     this.username = username;
   }
 
+  /**
+   * Returns the email of the user.
+   *
+   * @return
+   */
   public String getEmail() {
     return email;
   }
 
+  /**
+   * Sets the email of the user.
+   *
+   * @param email The email to be set.
+   */
   public void setEmail(String email) {
     this.email = email;
   }
 
+  /**
+   * Returns the current favorite genre of the user.
+   *
+   * @return
+   */
   public Genre getGenre() {
     return genre;
   }
 
+  /**
+   * Sets the current favorite genre of the user.
+   *
+   * @param genre The current favorite genre of the user.
+   */
   public void setGenre(Genre genre) {
     this.genre = genre;
   }

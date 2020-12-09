@@ -3,7 +3,7 @@ package edu.cnm.deepdive.tunefull.model;
 import com.google.gson.annotations.Expose;
 
 /**
- * Holds data in the database for Relationships.
+ * Holds data in the database for relationships between users.
  */
 public class Relationship {
 
