@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/colorPrimaryCards"
+  android:layout_height="wrap_content"
+  android:padding="@dimen/standard_padding"
+  android:background="@color/colorPrimary"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryCards"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/play_button"
@@ -16,7 +27,6 @@
     app:iconSize="@dimen/medium_icon_dimen"
     app:iconTint="@color/colorPrimaryVariant"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/clip_poster"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -26,6 +36,8 @@
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/small_text_size"
+    android:maxWidth="@dimen/clip_text_max_width"
+    android:textAlignment="center"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@+id/clip_title"
     app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +50,8 @@
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/small_text_size"
+    android:maxWidth="@dimen/clip_text_max_width"
+    android:textAlignment="center"
     app:layout_constraintTop_toBottomOf="@id/clip_poster"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +66,10 @@
     app:icon="@drawable/ic_add_friend_24"
     app:iconSize="@dimen/medium_icon_dimen"
     app:iconTint="@color/colorPrimaryVariant"
-    app:layout_constraintStart_toEndOf="@id/clip_poster"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

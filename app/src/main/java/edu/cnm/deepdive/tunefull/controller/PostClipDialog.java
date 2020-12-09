@@ -34,12 +34,6 @@ public class PostClipDialog extends DialogFragment {
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-    trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
-    clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
-    trackViewModel.getTrack().observe(getActivity(), (track) -> {
-          this.track = track;
-        }
-    );
     binding = DialogPostClipBinding.inflate(LayoutInflater.from(getContext()));
     Slider slider = binding.beginTimestampSlider;
     //TODO setValueTo works in the file but not programmatically, why?
@@ -73,6 +67,14 @@ public class PostClipDialog extends DialogFragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
+    clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
+    trackViewModel.getTrack().observe(getActivity(), (track) -> {
+          this.track = track;
+          binding.beginTimestampSlider.setValueTo((track.duration / MILLIS_PER_SEC) - MAX_CLIP_SEC);
+
+        }
+    );
   }
 
 }

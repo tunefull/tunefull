@@ -43,6 +43,10 @@ public class ClipViewModel extends AndroidViewModel {
     feedType = (index == 0) ? FeedType.DISCOVERY : FeedType.FRIENDS_FOLLOWS;
   }
 
+  public LiveData<Throwable> getThrowable() {
+    return throwable;
+  }
+
   public FeedType getFeedType() {
     return feedType;
   }

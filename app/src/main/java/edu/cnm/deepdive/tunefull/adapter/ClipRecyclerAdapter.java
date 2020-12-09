@@ -2,6 +2,7 @@ package edu.cnm.deepdive.tunefull.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -60,15 +61,20 @@ public class ClipRecyclerAdapter extends RecyclerView.Adapter<Holder> {
       this.binding = binding;
     }
 
+    // TODO this isn't getting the feed-type variables
     private void bind(int position) {
       Clip clip = clips.get(position);
       binding.clipPoster.setText(clip.getUser().getUsername());
       binding.clipTitle.setText(clip.getSongTitle());
-      if (feedType != FeedType.DISCOVERY) {
+      if (feedType == FeedType.FRIENDS_FOLLOWS) {
         binding.addFriendButton.setIcon(ContextCompat.getDrawable(context, R.drawable.ic_check_24));
+        binding.addFriendButton.setClickable(false);
+      } else if (feedType == FeedType.ME) {
+        binding.addFriendButton.setVisibility(View.GONE);
+      } else {
+        binding.addFriendButton.setOnClickListener((v) -> addFriendListener.onClick(clip));
       }
       binding.playButton.setOnClickListener((v) -> playListener.onCLick(clip));
-      binding.addFriendButton.setOnClickListener((v) -> addFriendListener.onClick(clip));
     }
   }
 

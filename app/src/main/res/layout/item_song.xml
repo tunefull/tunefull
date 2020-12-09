@@ -56,7 +56,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    tools:text="My Cool Clip"/>
+    tools:text="My Cool Song"/>
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/create_clip_button"

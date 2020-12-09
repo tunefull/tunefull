@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.tunefull.adapter.LikedSongsRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentLikedSongsBinding;
+import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
 
@@ -48,6 +50,12 @@ public class LikedSongsFragment extends Fragment {
           binding.songRecycler.setAdapter(adapter);
         }
     );
+    ClipViewModel clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
+    clipViewModel.getThrowable().observe(lifecycleOwner, (throwable) -> {
+      if (throwable != null) {
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+      }
+    });
   }
 
   @Override
