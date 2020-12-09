@@ -73,6 +73,9 @@ public class ProfileFragment extends Fragment {
       Intent intent = new Intent(getContext(), RelationshipsActivity.class);
       startActivity(intent);
     });
+    binding.newClip.setOnClickListener((v) -> {
+      ((MainActivity) getActivity()).switchToNewClip();
+    });
     return binding.getRoot();
   }
 

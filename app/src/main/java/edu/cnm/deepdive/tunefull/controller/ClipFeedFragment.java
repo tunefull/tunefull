@@ -69,8 +69,8 @@ public class ClipFeedFragment extends Fragment {
         sectionText = R.string.discovery;
     }
     binding.sectionLabel.setText(sectionText);
-    binding.testSwitch.setOnClickListener((v) -> {
-      ((MainActivity) getActivity()).switchToProfile();
+    binding.newClip.setOnClickListener((v) -> {
+      ((MainActivity) getActivity()).switchToNewClip();
     });
     return binding.getRoot();
   }

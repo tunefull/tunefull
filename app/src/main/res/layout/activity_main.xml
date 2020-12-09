@@ -28,17 +28,4 @@
       app:tabIndicatorColor="@color/colorAccent"/>
   </com.google.android.material.appbar.AppBarLayout>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/new_clip"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/fab_margin"
-    android:layout_gravity="bottom|end"
-    android:src="@drawable/ic_tunefull_logo_add_simple"
-    android:contentDescription="@string/create_a_new_clip"
-    app:tint="@color/colorPrimary"
-    app:layout_constraintTop_toBottomOf="@id/logout"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
