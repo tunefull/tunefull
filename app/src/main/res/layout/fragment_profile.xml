@@ -69,12 +69,12 @@
     app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/my_clips"
-    app:layout_constraintBottom_toTopOf="@id/my_friends_follows"
+    app:layout_constraintBottom_toTopOf="@id/my_friends"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
 
   <com.google.android.material.button.MaterialButton
-    android:id="@+id/my_friends_follows"
+    android:id="@+id/my_friends"
     android:layout_width="@dimen/card_horizontal_dimen"
     android:layout_height="@dimen/card_vertical_dimen"
     android:backgroundTint="@color/colorPrimaryCards"
@@ -85,6 +85,22 @@
     app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
     app:layout_constraintTop_toBottomOf="@id/friend_requests"
+    app:layout_constraintBottom_toTopOf="@id/my_follows"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/my_follows"
+    android:layout_width="@dimen/card_horizontal_dimen"
+    android:layout_height="@dimen/card_vertical_dimen"
+    android:backgroundTint="@color/colorPrimaryCards"
+    android:text="@string/my_follows"
+    android:textSize="@dimen/medium_text_size"
+    android:textAllCaps="false"
+    app:icon="@drawable/ic_follow_person_24"
+    app:iconTint="@color/colorPrimaryVariant"
+    app:iconSize="@dimen/medium_icon_dimen"
+    app:layout_constraintTop_toBottomOf="@id/my_friends"
     app:layout_constraintBottom_toTopOf="@id/logout"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
@@ -100,7 +116,7 @@
     app:icon="@drawable/ic_goodbye_24"
     app:iconTint="@color/colorPrimaryVariant"
     app:iconSize="@dimen/medium_icon_dimen"
-    app:layout_constraintTop_toBottomOf="@id/my_friends_follows"
+    app:layout_constraintTop_toBottomOf="@id/my_follows"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>

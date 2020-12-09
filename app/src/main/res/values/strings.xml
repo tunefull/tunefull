@@ -14,7 +14,7 @@
   <string name="set_your_genre_mood">Set my genre mood</string>
   <string name="my_clips">My clips</string>
   <string name="friend_requests">Friend requests</string>
-  <string name="my_friends_follows">My friends/follows</string>
+  <string name="my_friends_follows">My friends</string>
   <string name="logout">Logout</string>
   <string name="create_a_new_clip">Create a new clip</string>
   <string name="liked_songs">Liked songs</string>
@@ -24,4 +24,5 @@
   <string name="pick_a_genre">Pick a genre:</string>
   <string name="post">Post</string>
   <string name="install_spotify">Please install the Spotify app first.</string>
+  <string name="my_follows">My follows</string>
 </resources>

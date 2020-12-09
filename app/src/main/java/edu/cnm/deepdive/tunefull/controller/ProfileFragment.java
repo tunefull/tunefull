@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.tunefull.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,17 +44,26 @@ public class ProfileFragment extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    navController = NavHostFragment.findNavController(this);
+//    navController = NavHostFragment.findNavController(this);
     binding = FragmentProfileBinding.inflate(inflater);
     binding.sectionLabel.setText(R.string.profile);
+    binding.myClips.setOnClickListener((v) -> {
+//      navController.navigate(ProfileFragmentDirections.openSpotify());
+    });
+    binding.setGenre.setOnClickListener((v) -> {
+          ChangeGenreDialog dialog = new ChangeGenreDialog();
+          dialog.show(getChildFragmentManager(), dialog.getClass().getSimpleName());
+        }
+    );
+    binding.friendRequests.setOnClickListener((v) -> {
+      Intent intent = new Intent(getContext(), RelationshipsActivity.class);
+      startActivity(intent);
+    });
     return binding.getRoot();
   }
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    binding.myClips.setOnClickListener((v) -> {
-//      navController.navigate(ProfileFragmentDirections.openSpotify());
-    });
   }
 }

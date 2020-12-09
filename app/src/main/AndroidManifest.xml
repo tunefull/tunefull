@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="edu.cnm.deepdive.tunefull">
-
-  <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
     android:allowBackup="false"
@@ -13,7 +11,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme.NoActionBar"
     android:usesCleartextTraffic="true">
-    <activity android:name=".controller.NavigationActivity">
+    <activity android:name=".controller.RelationshipsActivity"
+      android:parentActivityName=".controller.MainActivity">
     </activity>
     <activity android:name=".controller.LoginResponseActivity">
       <intent-filter>
@@ -41,5 +40,6 @@
     </activity>
   </application>
 
+  <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

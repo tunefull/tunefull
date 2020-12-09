@@ -3,56 +3,50 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/colorPrimaryCards"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  android:background="@color/colorPrimaryCards">
 
-  <com.google.android.material.button.MaterialButton
-    android:id="@+id/play_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@color/colorPrimaryCards"
-    app:icon="@drawable/ic_play_circle_24"
-    app:iconSize="@dimen/medium_icon_dimen"
-    app:iconTint="@color/colorPrimaryVariant"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/song_title"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/vertical_guideline"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    app:layout_constraintGuide_percent=".7"
+    android:orientation="vertical"/>
 
   <TextView
-    android:id="@+id/song_title"
+    android:id="@+id/relationship_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
-    android:textSize="@dimen/small_text_size"
+    android:textSize="@dimen/medium_text_size"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/song_artist"
+    app:layout_constraintBottom_toTopOf="@id/genre"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
     tools:text="Laura Steiner"/>
 
   <TextView
-    android:id="@+id/song_artist"
+    android:id="@+id/genre"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/small_text_size"
-    app:layout_constraintTop_toBottomOf="@id/song_title"
+    app:layout_constraintTop_toBottomOf="@id/relationship_name"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    tools:text="My Cool Clip"/>
+    app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
+    tools:text="Metal"/>
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/create_clip_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/colorPrimaryCards"
-    app:icon="@drawable/ic_tunefull_logo_add_simple"
+    app:icon="@drawable/ic_add_friend_24"
     app:iconSize="@dimen/medium_icon_dimen"
     app:iconTint="@color/colorSecondary"
-    app:layout_constraintStart_toEndOf="@id/song_title"
+    app:layout_constraintStart_toEndOf="@id/vertical_guideline"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"/>

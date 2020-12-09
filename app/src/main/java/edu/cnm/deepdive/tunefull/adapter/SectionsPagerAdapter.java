@@ -35,8 +35,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
       return ClipFeedFragment.newInstance(position);
     }
     else {
-//      return ProfileFragment.newInstance(position);
-      return new NestedFragment();
+      return ProfileFragment.newInstance(position);
+//      return new NestedFragment();
     }
   }
 

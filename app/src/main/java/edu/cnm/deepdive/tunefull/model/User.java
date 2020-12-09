@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.tunefull.model;
 
+import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 
 public class User {
@@ -53,6 +54,13 @@ public class User {
    */
   public enum Genre {
     CLASSICAL, ROCK_N_ROLL, POP, JAZZ, METAL, HIPHOP, R_AND_B, BLUES, FOLK, OPERA, ELECTRONIC,
-    ALTERNATIVE, PUNK, REGGAE, CLASSIC_ROCK, DISCO, SWING, FUNK, COUNTRY, CONJUNTO, LATIN, FILM
+    ALTERNATIVE, PUNK, REGGAE, CLASSIC_ROCK, DISCO, SWING, FUNK, COUNTRY, CONJUNTO, LATIN, FILM;
+
+    // TODO fix toSTring
+    @NonNull
+    @Override
+    public String toString() {
+      return super.toString();
+    }
   }
 }

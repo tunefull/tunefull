@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="@dimen/standard_dialog_width"
-  android:layout_height="@dimen/standard_dialog_height"
+  android:layout_height="wrap_content"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <TextView
@@ -11,10 +11,10 @@
     android:layout_height="wrap_content"
     android:text="@string/pick_a_genre"
     android:background="@color/colorPrimary"
+    android:layout_margin="@dimen/half_margin"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
-
 
   <Spinner
     android:id="@+id/genre_spinner"
@@ -22,8 +22,8 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:backgroundTint="@color/colorPrimary"
+    android:layout_margin="@dimen/half_margin"
     app:layout_constraintTop_toBottomOf="@id/spinner_message"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
 

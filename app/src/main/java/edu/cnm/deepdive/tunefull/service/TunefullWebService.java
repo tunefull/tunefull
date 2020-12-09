@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.tunefull.BuildConfig;
 import edu.cnm.deepdive.tunefull.model.Clip;
+import edu.cnm.deepdive.tunefull.model.Relationship;
 import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.model.User.Genre;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel.Source;
@@ -29,14 +30,23 @@ public interface TunefullWebService {
   @GET("users/me")
   Single<User> getProfile(@Header("Authorization") String bearerToken);
 
-  @GET("clips")
-  Single<List<Clip>> getClips(@Header("Authorization") String bearerToken, Source source);
-
   @PUT("users/me/genre")
   Single<Genre> setGenre(@Header("Authorization") String bearerToken, Genre genre);
 
+  @GET("clips")
+  Single<List<Clip>> getClips(@Header("Authorization") String bearerToken, Source source);
+
   @POST("clips")
-  Single<Clip> postClip(String bearerToken, Clip clip);
+  Single<Clip> postClip(@Header("Authorization") String bearerToken, Clip clip);
+
+  @GET("friendships")
+  Single<List<Relationship>> getFriendships(@Header("Authorization") String bearerToken);
+
+  @GET("follows")
+  Single<List<Relationship>> getFollows(@Header("Authorization") String bearerToken);
+
+  @GET("pending")
+  Single<List<Relationship>> getPending(@Header("Authorization") String bearerToken);
 
   class InstanceHolder {
 
