@@ -37,6 +37,11 @@ android {
         buildConfigField "String", "BASE_URL",
                 quoted(getProperty(connection_properties, "base_url"))
 
+        buildConfigField "String", "GOOGLE_CLIENT_ID",
+                quoted(getProperty(connection_properties, "google_client_id"))
+        buildConfigField "String", "GOOGLE_BASE_URL",
+                quoted(getProperty(connection_properties, "google_base_url"))
+
 
         resValue "string", "client_id", getProperty(connection_properties, "client_id")
         resValue "string", "authorization_scope", getProperty(connection_properties, "authorization_scope")
@@ -119,6 +124,9 @@ dependencies {
 
     // OkHttp logging dependency
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    // Google Sign In dependency
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     //OpenId dependency (Spotify Sign In)
     implementation 'net.openid:appauth:0.7.1'

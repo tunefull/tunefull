@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.tunefull.service;
 
 import android.content.Context;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.model.User.Genre;
 import io.reactivex.Single;
@@ -11,11 +12,13 @@ public class UserRepository {
   private final Context context;
   private final TunefullWebService webService;
   private final SpotifySignInService signInService;
+  private final GoogleSignInService googleSignInService;
 
   public UserRepository(Context context) {
     this.context = context;
     webService = TunefullWebService.getInstance();
     signInService = SpotifySignInService.getInstance();
+    googleSignInService = GoogleSignInService.getInstance();
   }
 
   public Single<User> getProfileFromServer() {
