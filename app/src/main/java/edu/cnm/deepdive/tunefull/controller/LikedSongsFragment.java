@@ -41,18 +41,19 @@ public class LikedSongsFragment extends Fragment {
     trackViewModel = new ViewModelProvider(getActivity()).get(TrackViewModel.class);
     spotifyViewModel = new ViewModelProvider(getActivity()).get(SpotifyViewModel.class);
     trackViewModel.getTracks().observe(lifecycleOwner, (tracks) -> {
-      LikedSongsRecyclerAdapter adapter = new LikedSongsRecyclerAdapter(getContext(), tracks,
-          (track) -> {
-            trackViewModel.setTrack(track);
-            spotifyViewModel.play(track);
-          },
-          (track) -> {
-            trackViewModel.setTrack(track);
-            PostClipDialog dialog = new PostClipDialog();
-            dialog.show(getChildFragmentManager(), dialog.getClass().getSimpleName());
-          });
-      binding.songRecycler.setAdapter(adapter);
-    });
+          LikedSongsRecyclerAdapter adapter = new LikedSongsRecyclerAdapter(getContext(), tracks,
+              (track) -> {
+                trackViewModel.setTrack(track);
+                spotifyViewModel.play(track);
+              },
+              (track) -> {
+                trackViewModel.setTrack(track);
+                PostClipDialog dialog = new PostClipDialog();
+                dialog.show(getChildFragmentManager(), dialog.getClass().getSimpleName());
+              });
+          binding.songRecycler.setAdapter(adapter);
+        }
+    );
   }
 
   @Override

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="@dimen/standard_padding"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:background="@color/colorPrimaryCards">
+  android:background="@color/colorPrimary">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryCards"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/vertical_guideline"
@@ -15,31 +26,55 @@
     android:orientation="vertical"/>
 
   <TextView
-    android:id="@+id/relationship_name"
+    android:id="@+id/requester_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/medium_text_size"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/genre"
+    app:layout_constraintBottom_toTopOf="@id/requester_genre"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
-    tools:text="Laura Steiner"/>
+    tools:text="Requester"/>
 
   <TextView
-    android:id="@+id/genre"
+    android:id="@+id/requester_genre"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:textSize="@dimen/small_text_size"
-    app:layout_constraintTop_toBottomOf="@id/relationship_name"
-    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/requester_name"
+    app:layout_constraintBottom_toTopOf="@id/requested_name"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
     tools:text="Metal"/>
 
+  <TextView
+    android:id="@+id/requested_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/textColor"
+    android:textSize="@dimen/medium_text_size"
+    app:layout_constraintTop_toBottomOf="@id/requester_genre"
+    app:layout_constraintBottom_toTopOf="@id/requested_genre"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
+    tools:text="Requested"/>
+
+  <TextView
+    android:id="@+id/requested_genre"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/textColor"
+    android:textSize="@dimen/small_text_size"
+    app:layout_constraintTop_toBottomOf="@id/requested_name"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
+    tools:text="Pop"/>
+
   <com.google.android.material.button.MaterialButton
-    android:id="@+id/create_clip_button"
+    android:id="@+id/add_friend_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/colorPrimaryCards"
@@ -51,4 +86,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

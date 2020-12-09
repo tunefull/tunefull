@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.tunefull.R;
+import edu.cnm.deepdive.tunefull.adapter.RelationshipRecyclerAdapter;
 import edu.cnm.deepdive.tunefull.databinding.FragmentRelationshipBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 
@@ -62,9 +63,12 @@ public class RelationshipFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
     viewModel = new ViewModelProvider(getActivity()).get(RelationshipViewModel.class);
-    viewModel.getRelationships(relationshipType).observe(getViewLifecycleOwner(), (relationships) -> {
-      //set up adapter
-      //if the type is friends, put havefriendship icon, if the type is following, no icon
+    viewModel.getRelationships(relationshipType).observe(lifecycleOwner, (relationships) -> {
+      RelationshipRecyclerAdapter adapter = new RelationshipRecyclerAdapter(getContext(),
+          relationships,
+          (relationship) -> viewModel.saveRelationship(relationship),
+          relationshipType);
+      binding.userRecycler.setAdapter(adapter);
     });
   }
 

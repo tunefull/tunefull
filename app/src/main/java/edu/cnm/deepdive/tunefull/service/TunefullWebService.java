@@ -48,6 +48,12 @@ public interface TunefullWebService {
   @GET("pending")
   Single<List<Relationship>> getPending(@Header("Authorization") String bearerToken);
 
+  @POST("friendships")
+  Single<Relationship> postRelationship(@Header("Authorization") String bearerToken, User user);
+
+  @PUT("friendships/{relationshipId}")
+  Single<Relationship> updateRelationship(@Header("Authorization") String bearerToken, long relationshipId, boolean accepted);
+
   class InstanceHolder {
 
     private static final TunefullWebService INSTANCE;

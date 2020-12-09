@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.tunefull.controller.RelationshipFragment.RelationshipType;
 import edu.cnm.deepdive.tunefull.model.Relationship;
+import edu.cnm.deepdive.tunefull.model.User.Genre;
+import edu.cnm.deepdive.tunefull.service.RelationshipRepository;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import edu.cnm.deepdive.tunefull.service.TunefullWebService;
 import io.reactivex.disposables.CompositeDisposable;
@@ -18,75 +20,82 @@ public class RelationshipViewModel extends AndroidViewModel {
   private final CompositeDisposable pending;
   private final SpotifySignInService signInService;
   private final TunefullWebService webService;
+  private final RelationshipRepository relationshipRepository;
   private final MutableLiveData<Throwable> throwable;
   private final MutableLiveData<List<Relationship>> friendships;
   private final MutableLiveData<List<Relationship>> follows;
   private final MutableLiveData<List<Relationship>> pendingRelationships;
-  private final MutableLiveData<RelationshipType> relationshipType;
+  private final MutableLiveData<Relationship> relationship;
 
   public RelationshipViewModel(@NonNull Application application) {
     super(application);
     pending = new CompositeDisposable();
     signInService = SpotifySignInService.getInstance();
     webService = TunefullWebService.getInstance();
+    relationshipRepository = new RelationshipRepository(application);
     throwable = new MutableLiveData<>();
     friendships = new MutableLiveData<>();
     follows = new MutableLiveData<>();
     pendingRelationships = new MutableLiveData<>();
-    relationshipType = new MutableLiveData<>();
-  }
-
-  public void setRelationshipType(RelationshipType type) {
-    relationshipType.setValue(type);
+    relationship = new MutableLiveData<>();
   }
 
   public LiveData<List<Relationship>> getRelationships(RelationshipType type) {
     switch (type) {
       case FRIENDS:
-        return getFriendships();
+        getFriendships();
+        return friendships;
       case FOLLOWING:
-        return getFollows();
+        getFollows();
+        return follows;
       default:
-        return getPendingRelationships();
+        getPendingRelationships();
+        return pendingRelationships;
     }
   }
 
-  private LiveData<List<Relationship>> getFriendships() {
+  public void getFriendships() {
+    throwable.setValue(null);
     pending.add(
-        signInService.refresh()
-        .observeOn(Schedulers.io())
-        .flatMap(webService::getFriendships)
-        .subscribe(
-            friendships::postValue,
-            throwable::postValue
-        )
+        relationshipRepository.getFriendships()
+            .subscribe(
+                friendships::postValue,
+                throwable:: postValue
+            )
     );
-    return friendships;
   }
 
-  private LiveData<List<Relationship>> getFollows() {
+  public void getFollows() {
+    throwable.setValue(null);
     pending.add(
-        signInService.refresh()
-            .observeOn(Schedulers.io())
-            .flatMap(webService::getFollows)
+        relationshipRepository.getFollowing()
             .subscribe(
                 follows::postValue,
-                throwable::postValue
+                throwable:: postValue
             )
     );
-    return follows;
   }
 
-  private LiveData<List<Relationship>> getPendingRelationships() {
+  public void getPendingRelationships() {
+    throwable.setValue(null);
     pending.add(
-        signInService.refresh()
-            .observeOn(Schedulers.io())
-            .flatMap(webService::getPending)
+        relationshipRepository.getPendingRelationships()
             .subscribe(
                 pendingRelationships::postValue,
-                throwable::postValue
+                throwable:: postValue
             )
     );
-    return pendingRelationships;
+  }
+
+  public void saveRelationship(Relationship relationship) {
+    throwable.setValue(null);
+    this.relationship.setValue(relationship);
+    pending.add(
+        relationshipRepository.saveRelationship(relationship)
+            .subscribe(
+                this.relationship::postValue,
+                throwable:: postValue
+            )
+    );
   }
 }
