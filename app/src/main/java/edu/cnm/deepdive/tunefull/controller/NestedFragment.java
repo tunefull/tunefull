@@ -7,8 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import edu.cnm.deepdive.tunefull.R;
 
+/**
+ * Currently unimplemented
+ */
 public class NestedFragment extends Fragment {
 
+  /**
+   * Inflates nothing currently.
+   *
+   * @param inflater           A {@code LayoutInflater}.
+   * @param container          A {@code ViewGroup}.
+   * @param savedInstanceState A {@code Bundle}.
+   * @return A {@code View}.
+   */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
