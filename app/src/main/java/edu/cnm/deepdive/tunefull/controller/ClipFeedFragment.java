@@ -17,6 +17,9 @@ import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
 
+/**
+ * The {@code ClipFeedFragment} hosts the heart of the app: the Discovery and TuneFull feed screens.
+ */
 public class ClipFeedFragment extends Fragment {
 
   private static final String MAIN_SCREENS_PREF_KEY = "main_index";
@@ -96,6 +99,9 @@ public class ClipFeedFragment extends Fragment {
     spotifyViewModel.disconnect();
   }
 
+  /**
+   * An enumerated type that lists the possible types of clip feeds.
+   */
   public enum FeedType {
     DISCOVERY, FRIENDS_FOLLOWS, ME
   }
