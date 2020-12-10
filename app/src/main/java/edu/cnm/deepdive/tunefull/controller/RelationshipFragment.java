@@ -16,6 +16,9 @@ import edu.cnm.deepdive.tunefull.model.User;
 import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.UserViewModel;
 
+/**
+ * Currently unimplemented relationship fragment
+ */
 public class RelationshipFragment extends Fragment {
 
   private static final String ARG_SECTION_NUMBER = "section_number";
@@ -33,6 +36,11 @@ public class RelationshipFragment extends Fragment {
     return fragment;
   }
 
+  /**
+   * Sets up navigation
+   *
+   * @param savedInstanceState A {@code Bundle}.
+   */
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,6 +49,14 @@ public class RelationshipFragment extends Fragment {
         : RelationshipType.FRIENDS;
   }
 
+  /**
+   * Currently unimplemented. Will allow users to set relationships
+   *
+   * @param inflater           A {@code LayoutInflater}.
+   * @param container          A {@code ViewGroup}.
+   * @param savedInstanceState A {@code Bundle}.
+   * @return A {@code View}.
+   */
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,6 +77,12 @@ public class RelationshipFragment extends Fragment {
     return binding.getRoot();
   }
 
+  /**
+   * Currently unimplemented.
+   *
+   * @param view               A {@code View} object.
+   * @param savedInstanceState A {@code Bundle}.
+   */
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
