@@ -9,6 +9,10 @@ import edu.cnm.deepdive.tunefull.service.SpotifyRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.List;
 
+/**
+ * The {@code TrackViewModel} talks to the {@link SpotifyRepository} to communicate with the
+ * server.
+ */
 public class TrackViewModel extends AndroidViewModel {
 
   private final MutableLiveData<Track> track;
@@ -17,6 +21,11 @@ public class TrackViewModel extends AndroidViewModel {
   private final CompositeDisposable pending;
   private final SpotifyRepository spotifyRepository;
 
+  /**
+   * The constructor initializes the {@code MutableLiveData} used in the viewmodel.
+   *
+   * @param application The current application.
+   */
   public TrackViewModel(Application application) {
     super(application);
     track = new MutableLiveData<>();
@@ -27,26 +36,44 @@ public class TrackViewModel extends AndroidViewModel {
     loadTracks();
   }
 
+  /**
+   * Returns LiveData of a list of tracks.
+   *
+   * @return LiveData of a list of tracks.
+   */
   public LiveData<List<Track>> getTracks() {
     return tracks;
   }
 
+  /**
+   * Returns LiveData of a single track.
+   *
+   * @return LiveData of a single track.
+   */
   public LiveData<Track> getTrack() {
     return track;
   }
 
+  /**
+   * Sets the value of LiveData to a specified track.
+   *
+   * @param track The track to be set.
+   */
   public void setTrack(Track track) {
     this.track.setValue(track);
   }
 
+  /**
+   * Loads tracks.
+   */
   public void loadTracks() {
     throwable.setValue(null);
     pending.add(
         spotifyRepository.getAll()
-        .subscribe(
-            tracks::postValue,
-            throwable::postValue
-        )
+            .subscribe(
+                tracks::postValue,
+                throwable::postValue
+            )
     );
   }
 }

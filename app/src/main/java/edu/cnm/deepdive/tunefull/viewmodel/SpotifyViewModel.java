@@ -11,18 +11,31 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.model.Clip;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The {@code SpotifyViewModel} uses the Spotify SDK to talk to the Spotify app on the device.
+ */
 public class SpotifyViewModel extends AndroidViewModel {
 
   private static String clientId;
   private static String redirectUri;
   private SpotifyAppRemote spotifyAppRemote;
 
+  /**
+   * The constructor sets up the clientID and redirectURI for the app with Spotify authorization.
+   *
+   * @param application
+   */
   public SpotifyViewModel(Application application) {
     super(application);
     clientId = application.getString(R.string.client_id);
     redirectUri = application.getString(R.string.redirect_uri);
   }
 
+  /**
+   * Plays a clip.
+   *
+   * @param clip The clip to be played.
+   */
   public void play(Clip clip) {
     ConnectionParams connectionParams = new ConnectionParams.Builder(clientId)
         .setRedirectUri(redirectUri)
@@ -42,6 +55,10 @@ public class SpotifyViewModel extends AndroidViewModel {
     });
   }
 
+  /**
+   * Plays a track.
+   * @param track The track to be played.
+   */
   public void play(Track track) {
     ConnectionParams connectionParams = new ConnectionParams.Builder(clientId)
         .setRedirectUri(redirectUri)
@@ -61,6 +78,9 @@ public class SpotifyViewModel extends AndroidViewModel {
     });
   }
 
+  /**
+   * Disconnects from the Spotify App Remote.
+   */
   public void disconnect() {
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
