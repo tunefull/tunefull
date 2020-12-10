@@ -23,7 +23,7 @@ public class SpotifyViewModel extends AndroidViewModel {
   /**
    * The constructor sets up the clientID and redirectURI for the app with Spotify authorization.
    *
-   * @param application
+   * @param application The application.
    */
   public SpotifyViewModel(Application application) {
     super(application);

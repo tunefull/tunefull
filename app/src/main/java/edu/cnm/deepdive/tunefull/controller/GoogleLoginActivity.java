@@ -2,15 +2,13 @@ package edu.cnm.deepdive.tunefull.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.ActivityGoogleLoginBinding;
-import edu.cnm.deepdive.tunefull.databinding.ActivityLoginBinding;
 import edu.cnm.deepdive.tunefull.service.GoogleSignInService;
 import edu.cnm.deepdive.tunefull.service.UserRepository;
 

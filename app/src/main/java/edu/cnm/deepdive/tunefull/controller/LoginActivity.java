@@ -10,10 +10,12 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.ActivityLoginBinding;
 import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 
+/**
+ * This activity allows the user to sign in with Spotify.
+ */
 public class LoginActivity extends AppCompatActivity {
 
   private ActivityLoginBinding binding;
-
 
   @SuppressLint("CheckResult")
   @Override

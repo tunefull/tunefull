@@ -19,6 +19,9 @@ import edu.cnm.deepdive.tunefull.databinding.DialogPostClipBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
 
+/**
+ * The post clip dialog allows the user to post a clip.
+ */
 public class PostClipDialog extends DialogFragment {
 
   private static final float MILLIS_PER_SEC = 1_000;

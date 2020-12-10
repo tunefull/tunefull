@@ -17,8 +17,10 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.databinding.DialogChangeGenreBinding;
 import edu.cnm.deepdive.tunefull.model.User.Genre;
 import edu.cnm.deepdive.tunefull.viewmodel.UserViewModel;
-import org.jetbrains.annotations.NotNull;
 
+/**
+ * The change genre dialog allows the user to change their current genre mood.
+ */
 public class ChangeGenreDialog extends DialogFragment {
 
   private AlertDialog dialog;
@@ -27,6 +29,12 @@ public class ChangeGenreDialog extends DialogFragment {
   private Genre[] genres = Genre.values();
   private UserViewModel viewModel;
 
+  /**
+   * Creates the dialog and sets the spinner.
+   *
+   * @param savedInstanceState A {@code Bundle}.
+   * @return The dialog that was created.
+   */
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -48,12 +56,18 @@ public class ChangeGenreDialog extends DialogFragment {
 
   @Nullable
   @Override
-  public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     return binding.getRoot();
   }
 
   //TODO get genre from the webservice upon signin
+
+  /**
+   * Sets the genre spinner's current selection.
+   * @param view The current view.
+   * @param savedInstanceState A {@code Bundle}.
+   */
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
