@@ -8,6 +8,9 @@ import edu.cnm.deepdive.tunefull.service.SpotifySignInService;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 
+/**
+ * The {@code LoginReponseActivity} provides a space for the user to view Spotify permissions.
+ */
 public class LoginResponseActivity extends AppCompatActivity {
 
   @Override
@@ -20,6 +23,7 @@ public class LoginResponseActivity extends AppCompatActivity {
     Intent failureIntent = new Intent(this, LoginActivity.class)
         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
     setContentView(R.layout.activity_login_response);
-    SpotifySignInService.getInstance().completeSignIn(this, response, ex, successIntent, failureIntent);
+    SpotifySignInService.getInstance()
+        .completeSignIn(this, response, ex, successIntent, failureIntent);
   }
 }

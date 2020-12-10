@@ -9,6 +9,9 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.RelationshipFragment.RelationshipType;
 import edu.cnm.deepdive.tunefull.databinding.ActivityRelationshipsBinding;
 
+/**
+ * The relationships activity hosts relationship fragments.
+ */
 public class RelationshipsActivity extends AppCompatActivity {
 
     private static final String MAIN_SCREENS_PREF_KEY = "main_index";

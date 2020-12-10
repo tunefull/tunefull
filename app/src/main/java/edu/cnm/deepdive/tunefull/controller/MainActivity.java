@@ -2,14 +2,12 @@ package edu.cnm.deepdive.tunefull.controller;
 
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.SectionsPagerAdapter;
 import edu.cnm.deepdive.tunefull.service.UserRepository;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends AppCompatActivity {
 
