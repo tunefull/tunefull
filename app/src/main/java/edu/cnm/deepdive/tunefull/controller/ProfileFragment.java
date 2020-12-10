@@ -18,6 +18,9 @@ import edu.cnm.deepdive.tunefull.databinding.FragmentProfileBinding;
 import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.RelationshipViewModel;
 
+/**
+ * The profile fragment is where the user will be able to edit their profile.
+ */
 public class ProfileFragment extends Fragment {
 
   private static final String RELATIONSHIP_PREF_KEY = "relationship_index";
@@ -37,13 +40,25 @@ public class ProfileFragment extends Fragment {
     fragment.setArguments(bundle);
     return fragment;
   }
-
+  /**
+   * Initializes variables and sets the arguments.
+   *
+   * @param savedInstanceState A {@code Bundle}.
+   */
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     index = (getArguments() != null)? getArguments().getInt(ARG_SECTION_NUMBER) : 0;
   }
 
+  /**
+   * Initializes display text and navigation.
+   *
+   * @param inflater A {@code LayoutInflater}.
+   * @param container  {@code ViewGroup}.
+   * @param savedInstanceState A {@code Bundle}.
+   * @return A {@code View}.
+   */
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {

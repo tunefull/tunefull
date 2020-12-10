@@ -25,6 +25,11 @@ public class GoogleLoginActivity extends AppCompatActivity {
   private ActivityGoogleLoginBinding binding;
   private UserRepository userRepository;
 
+  /**
+   * Initializes variables and sets an OnClickListener to Google Sign In.
+   *
+   * @param savedInstanceState A {@code Bundle}.
+   */
   @SuppressLint("CheckResult")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class GoogleLoginActivity extends AppCompatActivity {
   }
 
   /**
-   * Completes signin, if possible.
+   * Completes sign-in, if possible.
    *
    * @param requestCode A code that indicates a type of request.
    * @param resultCode  A code that indicates a type of result.
