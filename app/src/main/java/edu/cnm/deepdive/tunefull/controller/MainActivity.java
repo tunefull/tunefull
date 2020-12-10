@@ -9,6 +9,9 @@ import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.adapter.SectionsPagerAdapter;
 import edu.cnm.deepdive.tunefull.service.UserRepository;
 
+/**
+ * The main activity for the app. Hosts all tabs.
+ */
 public class MainActivity extends AppCompatActivity {
 
   private UserRepository userRepository; // FIXME
@@ -48,11 +51,17 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Switches to the profile fragment.
+   */
   public void switchToProfile() {
     ViewPager viewPager = findViewById(R.id.view_pager);
     viewPager.setCurrentItem(4, true);
   }
 
+  /**
+   * Switches to the liked songs fragment.
+   */
   public void switchToNewClip() {
     ViewPager viewPager = findViewById(R.id.view_pager);
     viewPager.setCurrentItem(3, true);
