@@ -19,8 +19,10 @@ import edu.cnm.deepdive.tunefull.databinding.FragmentSpotifyBinding;
 // TODO take this out, most of it is in other classes
 public class SpotifyFragment extends Fragment {
 
+
   private static final String ARG_SECTION_NUMBER = "section_number";
   private static final String TRACK_FORMAT = "spotify:track:%s";
+
 
   private static String clientId;
   private static String redirectUri;
@@ -31,6 +33,13 @@ public class SpotifyFragment extends Fragment {
   private long beginTimestamp = 159000;
   private long endTimestamp = 189000;
 
+  /**
+   * Currently does not inflate anything
+   *
+   * @param index
+   * @param context the application context
+   * @return
+   */
   public static SpotifyFragment newInstance(int index, Context context) {
     SpotifyFragment fragment = new SpotifyFragment();
     Bundle bundle = new Bundle();
@@ -54,6 +63,11 @@ public class SpotifyFragment extends Fragment {
     return binding.getRoot();
   }
 
+  /**
+   *
+   * @param view    A {@code View} object
+   * @param savedInstanceState A {@code Bundle}
+   */
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -68,6 +82,10 @@ public class SpotifyFragment extends Fragment {
         connected();
       }
 
+      /**
+       *
+       * @param throwable throws on failure msg
+       */
       @Override
       public void onFailure(Throwable throwable) {
         Log.e(getClass().getSimpleName(), throwable.getMessage(), throwable);
@@ -75,12 +93,18 @@ public class SpotifyFragment extends Fragment {
     });
   }
 
+  /**
+   *
+   */
   @Override
   public void onStop() {
     super.onStop();
     SpotifyAppRemote.disconnect(spotifyAppRemote);
   }
 
+  /**
+   *
+   */
   private void connected() {
     spotifyAppRemote.getPlayerApi().play(String.format(TRACK_FORMAT, trackId));
     spotifyAppRemote.getPlayerApi().seekTo(beginTimestamp);
