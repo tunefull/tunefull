@@ -16,12 +16,23 @@ import edu.cnm.deepdive.tunefull.viewmodel.ClipViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.SpotifyViewModel;
 import edu.cnm.deepdive.tunefull.viewmodel.TrackViewModel;
 
+/**
+ * The liked songs fragment is the fragment that will allow the user to see the songs from Spotify and
+ * create clips.
+ */
 public class LikedSongsFragment extends Fragment {
 
   private FragmentLikedSongsBinding binding;
   private TrackViewModel trackViewModel;
   private SpotifyViewModel spotifyViewModel;
 
+  /**
+   *
+   * @param inflater           A {@code LayoutInflater}.
+   * @param container          A {@code ViewGroup}.
+   * @param savedInstanceState A {@code Bundle}.
+   * @return A {@code View}.
+   */
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -30,6 +41,12 @@ public class LikedSongsFragment extends Fragment {
     return binding.getRoot();
   }
 
+  /**
+   * Shows the songs that the user has liked on Spotify and allows the user to create clips.
+   *
+   * @param view               A {@code View} object.
+   * @param savedInstanceState A {@code Bundle}
+   */
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
