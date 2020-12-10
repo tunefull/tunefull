@@ -3,7 +3,7 @@ package edu.cnm.deepdive.tunefull.model;
 import com.google.gson.annotations.Expose;
 
 /**
- * Holds data in the database for relationships between users.
+ * Receives data from the server database for relationships between users.
  */
 public class Relationship {
 
@@ -107,7 +107,7 @@ public class Relationship {
    * Sets the boolean that determines whether one user accepted another user's
    * request for a friend relationship.
    *
-   * @param friendAccepted The boolean that determines whether the users are in a friend relationship.
+   * @param friendAccepted The boolean that determines whether a request has been accepted.
    */
   public void setFriendAccepted(Boolean friendAccepted) {
     this.friendAccepted = friendAccepted;

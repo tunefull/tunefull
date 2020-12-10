@@ -5,7 +5,7 @@ import com.spotify.protocol.types.Track;
 import java.util.List;
 
 /**
- * Holds data in the database for the track list responses.
+ * Receives responses from the Spotify API with lists of tracks.
  */
 public class TrackListResponse {
 
@@ -14,7 +14,7 @@ public class TrackListResponse {
   private List<ResponseItem> items;
 
   /**
-   * Returns a list of items.
+   * Returns a list of Spotify {@code Item} objects.
    *
    * @return
    */
@@ -23,21 +23,24 @@ public class TrackListResponse {
   }
 
   /**
-   * Sets a list of items.
+   * Sets a list of Spotify {@code Item} objects.
    *
-   * @param items The list of items.
+   * @param items The list of Items.
    */
   public void setItems(List<ResponseItem> items) {
     this.items = items;
   }
 
+  /**
+   * An individual {@code Item} within a Spotify API response.
+   */
   public static class ResponseItem {
 
     @Expose
     private Track track;
 
     /**
-     * Returns a song track.
+     * Returns a {@code Track}.
      *
      * @return
      */
@@ -46,9 +49,9 @@ public class TrackListResponse {
     }
 
     /**
-     * Sets a song track.
+     * Sets a {@code Track}.
      *
-     * @param track The song track.
+     * @param track The song's track..
      */
     public void setTrack(Track track) {
       this.track = track;

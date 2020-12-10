@@ -53,7 +53,8 @@ public class LikedSongsFragment extends Fragment {
     ClipViewModel clipViewModel = new ViewModelProvider(getActivity()).get(ClipViewModel.class);
     clipViewModel.getThrowable().observe(lifecycleOwner, (throwable) -> {
       if (throwable != null) {
-        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+        // TODO add this back in when debugging
+//        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
       }
     });
   }

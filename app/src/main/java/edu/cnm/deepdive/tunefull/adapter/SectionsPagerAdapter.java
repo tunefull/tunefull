@@ -8,13 +8,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment;
-import edu.cnm.deepdive.tunefull.controller.ClipFeedFragment.FeedType;
 import edu.cnm.deepdive.tunefull.controller.LikedSongsFragment;
 import edu.cnm.deepdive.tunefull.controller.ProfileFragment;
 
 /**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to one of the
- * sections/tabs/pages.
+ * A {@code FragmentPagerAdapter} that returns a fragment corresponding to one of the tabs.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -23,6 +21,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
       R.string.my_clips, R.string.my_liked_songs, R.string.profile};
   private final Context context;
 
+  /**
+   * The constructor initializes the context and calls the superclass constructor.
+   *
+   * @param context The application context.
+   * @param fm      A parameter passed to the superclass constructor.
+   */
   public SectionsPagerAdapter(Context context, FragmentManager fm) {
     super(fm);
     this.context = context;

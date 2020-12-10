@@ -11,6 +11,9 @@ import edu.cnm.deepdive.tunefull.databinding.ItemSongBinding;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The {@code LikedSongsRecyclerAdapter} allows for tracks to be shown in a scrolling list.
+ */
 public class LikedSongsRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
@@ -19,7 +22,15 @@ public class LikedSongsRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   private final List<Track> tracks;
   private final LayoutInflater inflater;
 
-
+  /**
+   * The constructor initializes the context, the list of tracks, and listeners for play buttons and
+   * add clip buttons.
+   *
+   * @param context            The application context.
+   * @param tracks             A list of tracks to be shown.
+   * @param playButtonListener A listener for the clip play button.
+   * @param clipButtonListener A listener for the add clip button.
+   */
   public LikedSongsRecyclerAdapter(@NonNull Context context, List<Track> tracks,
       OnSongPlayButtonClickListener playButtonListener,
       OnAddClipButtonClickListener clipButtonListener) {
@@ -49,6 +60,9 @@ public class LikedSongsRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     return tracks.size();
   }
 
+  /**
+   * The holder class contains methods to bind individual track objects to the recycler.
+   */
   class Holder extends RecyclerView.ViewHolder {
 
     private final ItemSongBinding binding;
@@ -71,11 +85,19 @@ public class LikedSongsRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     }
   }
 
+  /**
+   * This interface has a method that can be implemented to perform an action upon clicking the
+   * track play button.
+   */
   public interface OnSongPlayButtonClickListener {
 
     void onClick(Track track);
   }
 
+  /**
+   * This interface has a method that can be implemented to perform an action upon clicking the add
+   * clip button.
+   */
   public interface OnAddClipButtonClickListener {
 
     void onClick(Track track);

@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     // FIXME (this is just temporary to verify roundtrip)
     userRepository = new UserRepository(this);
-    userRepository.getProfileFromServer()
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(
-            (user) -> Toast.makeText(this, user.getUsername(), Toast.LENGTH_LONG).show(),
-            (throwable) -> Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show()
-        );
+//    userRepository.getProfileFromServer()
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribe(
+//            (user) -> Toast.makeText(this, user.getUsername(), Toast.LENGTH_LONG).show(),
+//            (throwable) -> Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show()
+//        );
   }
 
   private void setUpTabs() {

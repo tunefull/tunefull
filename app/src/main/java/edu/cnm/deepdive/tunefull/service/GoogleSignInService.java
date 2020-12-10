@@ -13,10 +13,9 @@ import com.google.android.gms.tasks.Task;
 import edu.cnm.deepdive.tunefull.BuildConfig;
 import io.reactivex.Single;
 
-
 /**
- * The GoogleSignInService class provides methods that allow the app to use Google Sign In to get
- * user information and to associate users with players in the database.
+ * The {@code GoogleSignInService} class provides methods that allow the app to use Google Sign In
+ * to get user information and to authenticate with the TuneFull server.
  */
 public class GoogleSignInService {
 
@@ -77,6 +76,12 @@ public class GoogleSignInService {
     );
   }
 
+  /**
+   * Refreshes the signin with Google and returns a formatted bearer token for use in communication
+   * with the TuneFull server.
+   *
+   * @return A formatted bearer token.
+   */
   public Single<String> refreshBearerToken() {
     return refresh()
         .map((account) -> String.format("Bearer %s", account.getIdToken()));
@@ -85,7 +90,7 @@ public class GoogleSignInService {
   /**
    * Allows the activity to start a signin request.
    *
-   * @param activity    The LoginActivity.
+   * @param activity    The {@link edu.cnm.deepdive.tunefull.controller.GoogleLoginActivity}.
    * @param requestCode A code that indicates a type of request.
    */
   public void startSignIn(Activity activity, int requestCode) {
@@ -112,7 +117,7 @@ public class GoogleSignInService {
   }
 
   /**
-   * Signs the user out. If the signout is unsucessful, the account is still set to null.
+   * Signs the user out. If the signout is unsuccessful, the account is still set to null.
    *
    * @return A {@code Task} containing {@code Void}.
    */

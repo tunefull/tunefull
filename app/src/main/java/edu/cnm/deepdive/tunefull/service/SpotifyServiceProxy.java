@@ -14,15 +14,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 
+/**
+ * An interface with methods that can be sent to the Spotify API.
+ */
 public interface SpotifyServiceProxy {
 
+  /**
+   * Returns a response of a list of saved or liked tracks from the current user.
+   *
+   * @param bearerToken The bearer token for authorization.
+   * @return A response with the user's saved tracks.
+   */
   @GET("me/tracks")
   Single<TrackListResponse> getSavedTracks(@Header("Authorization") String bearerToken);
 
+  /**
+   * Returns an instance of the singleton {@code SpotifyServiceProxy}.
+   *
+   * @return An instance of SpotifyServiceProxy.
+   */
   static SpotifyServiceProxy getInstance() {
     return InstanceHolder.INSTANCE;
   }
 
+  /**
+   * Holds an instance of the Spotify service proxy.
+   */
   class InstanceHolder {
 
     private static final SpotifyServiceProxy INSTANCE;

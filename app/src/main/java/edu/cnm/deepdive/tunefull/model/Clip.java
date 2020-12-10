@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 /**
- * Holds data in the database for clips.
+ * Receives data from the server database for clips.
  */
 public class Clip {
 
@@ -22,7 +22,6 @@ public class Clip {
   @Expose
   private String trackKey;
 
-  // TODO change service/erd/etc to be longs
   @Expose
   private long beginTimestamp;
 
@@ -180,7 +179,7 @@ public class Clip {
   }
 
   /**
-   * Returns the user that posted the clip.
+   * Returns the {@link User} that posted the clip.
    *
    * @return
    */
@@ -189,7 +188,7 @@ public class Clip {
   }
 
   /**
-   * Sets the user that posted the clip.
+   * Sets the {@code User} that posted the clip.
    *
    * @param user The user that posted the clip.
    */

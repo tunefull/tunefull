@@ -19,6 +19,10 @@ import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ResponseTypeValues;
 
+/**
+ * The {@code SpotifySignInService} class provides methods that allow the app to authenticate and
+ * connect with the Spotify app.
+ */
 public class SpotifySignInService {
 
   private static final String AUTH_STATE_KEY = "auth_state";
@@ -49,14 +53,33 @@ public class SpotifySignInService {
     authScope = context.getString(R.string.authorization_scope);
   }
 
+  /**
+   * Sets the application context for the class.
+   *
+   * @param context The application context.
+   */
   public static void setContext(Context context) {
     SpotifySignInService.context = context;
   }
 
+  /**
+   * Returns an instance of the singleton SpotifySignInService.
+   *
+   * @return An instance of SpotifySignInService.
+   */
   public static SpotifySignInService getInstance() {
     return InstanceHolder.INSTANCE;
   }
 
+  /**
+   * Allows the activity to start a signin request.
+   *
+   * @param activity          The current activity.
+   * @param requestCode       A request code for the signin request.
+   * @param completedActivity The {@link edu.cnm.deepdive.tunefull.controller.LoginResponseActivity}
+   *                          that the app will direct to.
+   * @param cancelledActivity The current {@link edu.cnm.deepdive.tunefull.controller.LoginActivity}.
+   */
   public void startSignIn(AppCompatActivity activity, int requestCode,
       Class<? extends AppCompatActivity> completedActivity,
       Class<? extends AppCompatActivity> cancelledActivity) {
@@ -78,9 +101,18 @@ public class SpotifySignInService {
     );
   }
 
+  /**
+   * Completes the signin process.
+   *
+   * @param activity      The current activity.
+   * @param response      The response from the authorization request.
+   * @param ex            An exception, if authorization did not complete.
+   * @param successIntent The {@link edu.cnm.deepdive.tunefull.controller.MainActivity} that
+   *                      successful login will redirect to.
+   * @param failureIntent The {@code LoginActivity} that unsuccessful login will redirect to.
+   */
   public void completeSignIn(AppCompatActivity activity, AuthorizationResponse response,
-      AuthorizationException ex,
-      Intent successIntent, Intent failureIntent) {
+      AuthorizationException ex, Intent successIntent, Intent failureIntent) {
     authState.update(response, ex);
     setAuthState(authState);
     if (response != null) {
@@ -104,6 +136,11 @@ public class SpotifySignInService {
 
   }
 
+  /**
+   * Refreshes the signin with Spotify.
+   *
+   * @return The bearer token.
+   */
   public Single<String> refresh() {
     return Single.create((emitter) ->
         authState.performActionWithFreshTokens(service,

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 
 /**
- * Holds data in the database for users. This includes enumerated types from
+ * Receives data from the server database for users. This also includes enumerated types from
  * the {@link Genre} enums.
  */
 public class User {
