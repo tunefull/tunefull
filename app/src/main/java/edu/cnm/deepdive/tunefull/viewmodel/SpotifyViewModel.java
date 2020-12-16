@@ -2,10 +2,12 @@ package edu.cnm.deepdive.tunefull.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.lifecycle.AndroidViewModel;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector.ConnectionListener;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
+import com.spotify.protocol.types.Capabilities;
 import com.spotify.protocol.types.Track;
 import edu.cnm.deepdive.tunefull.R;
 import edu.cnm.deepdive.tunefull.model.Clip;
@@ -68,6 +70,7 @@ public class SpotifyViewModel extends AndroidViewModel {
       @Override
       public void onConnected(SpotifyAppRemote spotifyAppRemote) {
         SpotifyViewModel.this.spotifyAppRemote = spotifyAppRemote;
+        Capabilities capabilities = new Capabilities(true);
         playTrack(track);
       }
 
@@ -118,6 +121,9 @@ public class SpotifyViewModel extends AndroidViewModel {
               // TODO remove after development complete
               if (t != null) {
                 Log.d("SpotifyActivity", track.name + " by " + track.artist.name);
+                // TODO use a different api or something
+                // this has the right track, so somehow in translation to the spotify sdk it's changing to a different one?
+                // capabilities.canPlayOnDemand must be true to play a track - and this is only true for premium users........ugh
               }
             }
         );
